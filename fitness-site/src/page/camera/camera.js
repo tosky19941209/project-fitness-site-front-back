@@ -14,7 +14,6 @@ function Camera() {
     const [accuracy, setAccuracy] = useState('')
     const [counter, setCounter] = useState(0)
     const [api_url, setapiURL] = useState('exercise_1')
-    const [kind_exercise, setKindExercise] = useState(null)
 
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
@@ -35,7 +34,6 @@ function Camera() {
                 const newdata = res.data
                 setCounter(newdata.counter)
                 setAccuracy(newdata.accuracy)
-                setKindExercise(newdata.kind_exercise)
             })
 
     };
@@ -58,58 +56,33 @@ function Camera() {
 
         if (stateVideoPlay == true) {
             videoRef.current.play()
-            var myInterval = setInterval(() => {
-                const video = videoRef.current;
-                if (video)
-                    poseRef.current.send({ image: video });
-            }, 80);
-            return () => {
-                clearInterval(myInterval);
-            }
+            // var myInterval = setInterval(() => {
+            //     const video = videoRef.current;
+            //     if (video)
+            //         poseRef.current.send({ image: video });
+            // }, 80);
+            // return () => {
+            //     clearInterval(myInterval);
+            // }
         }
     }, [stateVideoPlay])
 
-    useEffect(() => {
-        console.log("aoi_url:", api_url)
-        userPose.onResults(onResults);
-        poseRef.current = userPose;
-        return () => {
-            poseRef.current.close();
-        };
-    }, [api_url]);
-
+    // useEffect(() => {
+    //     console.log("aoi_url:", api_url)
+    //     userPose.onResults(onResults);
+    //     poseRef.current = userPose;
+    //     return () => {
+    //         poseRef.current.close();
+    //     };
+    // }, [api_url]);
 
     return (
         <>
-            <div className='camera_enable'>
-                <canvas ref={canvasRef} width='700px' height='600px' className='canvas_css'></canvas>
-                <video ref={videoRef} width='500px' height='300px' controls muted="muted">
-                    <source src='video1.mp4' type='video/mp4'>
-
-                    </source>
-                </video>
-            </div>
-            <button className='btn_start' onClick={() => {
-                if (stateVideoPlay === false)
-                    setVideoPlay(true)
-                else setVideoPlay(false)
-
-            }}>start</button>
-            <p>{counter + kind_exercise}</p>
-            <select width='100px' height='100px'
-                onChange={(e) => {
-                    setapiURL(e.target.value)
-                    api.get('/changed_exercise', {params:{kind:""}})
-                    .then(res => {
-                        console.log(res)
-                        setCounter(0)
-                    })
-                }}>
-                <option>exercise_1</option>
-                <option>exercise_2</option>
-                <option>exercise_3</option>
-            </select>
-            <progress value={accuracy} max="100" className='test_css'></progress>
+            <div style={{
+                width:"30vw",
+                height:"25vw",
+                backgroundColor:"aqua"
+            }}></div>
         </>
     )
 }

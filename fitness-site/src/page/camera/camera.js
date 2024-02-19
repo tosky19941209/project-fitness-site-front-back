@@ -15,7 +15,7 @@ function Camera() {
     const [counter, setCounter] = useState(0)
     const [api_url, setapiURL] = useState('exercise_1')
     const [kind_exercise, setKindExercise] = useState(null)
-    const [test, setTest] = useState(null)
+
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
         const videoElement = videoRef.current;

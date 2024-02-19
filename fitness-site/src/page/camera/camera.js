@@ -79,8 +79,8 @@ function Camera() {
     return (
         <>
             <div style={{
-                width:"30vw",
-                height:"25vw",
+                width:"60vw",
+                height:"35vw",
                 backgroundColor:"aqua"
             }}></div>
         </>

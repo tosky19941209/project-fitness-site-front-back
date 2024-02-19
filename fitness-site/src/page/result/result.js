@@ -6,8 +6,8 @@ function Result () {
     return (
         <>
             <div style={{
-                width:"10vw",
-                height:"30vw",
+                width:"30vw",
+                height:"40vw",
                 backgroundColor:"gray"
             }}>
 

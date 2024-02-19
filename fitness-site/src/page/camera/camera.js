@@ -14,7 +14,8 @@ function Camera() {
     const [accuracy, setAccuracy] = useState('')
     const [counter, setCounter] = useState(0)
     const [api_url, setapiURL] = useState('exercise_1')
-
+    const [cambtn_classname, setCamBtnClassName] = useState('btn_camera')
+    const [cambtnsvg_classname, setCamBtnSVGClassName] = useState('svg_css')
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
         const videoElement = videoRef.current;
@@ -79,16 +80,54 @@ function Camera() {
     return (
         <>
             <div className='camera-main-div'>
-                {/* <video className='webcam-css' width="100px" height="100px" controls>
-                    <source src='video1.mp4' type='video/mp4'></source>
-                </video> */}
                 <div className='webcam-css'></div>
                 <canvas ref={canvasRef} width='1150vw' height='670vw' style={{
                     position: 'absolute',
-                    backgroundColor: 'aqua',
+                    // backgroundColor: 'aqua',
+                    width: '60vw',
                     display: 'flex',
                     zIndex: '0'
                 }}></canvas>
+
+                <progress min='0' max='100' value='80'
+                    style={{
+                        zIndex: '1',
+                        width: '1vw',
+                        height: '35vw',
+                        // writingMode:'vertical-lr'
+                        writingMode: 'vertical-rl',
+                        marginLeft: '60vw',
+                        accentColor: 'aqua',
+                        boxShadow: '0 0 30px 10px rgba(0, 142, 236, 0.815)'
+                    }}
+                ></progress>
+
+                <button className={cambtn_classname} onClick={() => {
+                    if (cambtn_classname === 'btn_camera') {
+                        setCamBtnClassName('btn_camera_active')
+                        setCamBtnSVGClassName('svg_css_active')
+                    }
+                    else {
+                        setCamBtnClassName('btn_camera')
+                        setCamBtnSVGClassName('svg_css')
+                    }
+                }}>
+                    <svg
+                        className={cambtnsvg_classname}
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        height="1em"
+                        width="1em">
+                        <path
+                            fillRule="evenodd"
+                            d="M0 5a2 2 0 012-2h7.5a2 2 0 011.983 1.738l3.11-1.382A1 1 0 0116 4.269v7.462a1 1 0 01-1.406.913l-3.111-1.382A2 2 0 019.5 13H2a2 2 0 01-2-2V5zm11.5 5.175l3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 00-1 1v6a1 1 0 001 1h7.5a1 1 0 001-1V5a1 1 0 00-1-1H2z"
+                        />
+                    </svg>
+                </button>
+                <p className='accuracy_css_best'>60.86%</p>
+                <div className='counter_background_css'>
+                    <p className='counter_css'>1</p>
+                </div>
             </div>
         </>
     )

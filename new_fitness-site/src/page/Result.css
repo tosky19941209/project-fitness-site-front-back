@@ -1,30 +1,9 @@
-.result_main {
-    width: 30vw;
-    height: 40vw;
-    /* background-color: gray; */
-    margin-left: 3vw;
-}
-
-.videoPlay_css {
-    margin-top: -1vw;
-}
-
-.category_exercise_css{
-    width: 15vw;
-    margin-top: 4vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
-}
-
 .btn_start {
-    width:25vw;
-    height: 3vw;
     position: relative;
-    /* padding: 10px 20px; */
-    margin-top: 8vw;
+    padding: 10px 20px;
     border-radius: 7px;
     border: 1px solid rgb(61, 106, 255);
-    font-size: 34px;
+    font-size: 14px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 2px;

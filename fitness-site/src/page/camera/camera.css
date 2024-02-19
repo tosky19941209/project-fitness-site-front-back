@@ -19,3 +19,22 @@
     accent-color: aqua;
 
 }
+
+.camera-main-div{
+    display: flex;
+    flex-direction: column;
+    width:60vw;
+    height: 35vw;
+    /* z-index: ; */
+    background-color: black;
+}
+
+
+
+.webcam-css{
+    position: absolute;
+    width:60vw; 
+    height: 35vw;
+    background-color: rgb(11, 184, 98);
+    z-index: 1;
+}

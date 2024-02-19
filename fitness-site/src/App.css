@@ -38,8 +38,9 @@
 
 .Title-style {
   font-size: 100px;
-  color: aqua;
-  text-shadow: 20px 20px 40px rgba(233, 14, 14, 0.3);
+  color: rgb(17, 234, 42);
+  font-family: Monospace;
+  text-shadow: 0 0 30px #FF0000, 0 0 5px #0000FF;
   ;
 }
 

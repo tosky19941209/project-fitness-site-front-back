@@ -78,11 +78,18 @@ function Camera() {
 
     return (
         <>
-            <div style={{
-                width:"60vw",
-                height:"35vw",
-                backgroundColor:"aqua"
-            }}></div>
+            <div className='camera-main-div'>
+                {/* <video className='webcam-css' width="100px" height="100px" controls>
+                    <source src='video1.mp4' type='video/mp4'></source>
+                </video> */}
+                <div className='webcam-css'></div>
+                <canvas ref={canvasRef} width='1150vw' height='670vw' style={{
+                    position: 'absolute',
+                    backgroundColor: 'aqua',
+                    display: 'flex',
+                    zIndex: '0'
+                }}></canvas>
+            </div>
         </>
     )
 }

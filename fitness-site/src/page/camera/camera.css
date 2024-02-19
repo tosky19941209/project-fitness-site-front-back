@@ -1,0 +1,22 @@
+.camera_enable{
+    width:50vw;
+    height: 30vw;
+    background-color: aqua;
+    display: flex;
+}
+.canvas_css{
+
+    background-color: black;
+}
+.btn_start{
+    width: 500px;
+    height: 100px;
+    background-color: blue;
+}
+
+.test_css{
+    color: aqua;
+    accent-color: aqua;
+    width:500px;
+    height: 10px;
+}

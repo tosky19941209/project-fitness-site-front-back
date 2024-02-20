@@ -83,7 +83,7 @@ function Camera({ setStateResultData, stateResultData }) {
     }, [state_change_exercise])
     return (
         <>
-            <video ref={videoRef} width='50px' height='50px' controls>
+            <video ref={videoRef} width='0px' height='0px' controls>
                 <source src='video1.mp4'></source>
             </video>
             <div className='camera-main-div'>

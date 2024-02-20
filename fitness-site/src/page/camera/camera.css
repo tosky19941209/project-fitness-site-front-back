@@ -131,7 +131,13 @@
     position: relative;
     color: rgb(247, 3, 133);
     font-size: 70px;
+}
 
+.counter_increase_css {
+    position: relative;
+    color: rgb(247, 3, 133);
+    font-size: 200px;
+    transition: 1s;
 }
 
 .counter_background_css {

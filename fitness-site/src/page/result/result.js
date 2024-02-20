@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './Result.css'
-function Result() {
+import api from '../../service/axios'
+function Result({ setStateResultData, stateResultData }) {
     const [videokey, setVideoKey] = useState(0)
-    const [accuracy, setAccuracy] = useState(90)
-    const [kind_exercise, setKindExercise] = useState({
-        category:'Gym',
-        exercise_kind:'exercise_1'
-    })
+    const [accuracy, setAccuracy] = useState(0)
+    const [btn_name, setBtnName] = useState('Start')
+    const [isSelectDisabled, setIsSelectDisabled] = useState(false);
+    const [sampleVideoURL, setSampleVideo] = useState('')
+    const [number_category, setNumberCategory] = useState('')
+    const [number_exercise, setNumberExercise] = useState('')
+    const selectCategoryRef = useRef(null)
+    const selectExerciseRef = useRef(null)
+
     const select_kind_exercise = [
         'exercise_1',
         'exercise_2',
@@ -25,20 +30,46 @@ function Result() {
         'House'
     ]
 
+    useEffect(() => {
+        const category = selectCategoryRef.current.value
+        const exercise = selectExerciseRef.current.value
+        api.get('changed_exercise', {params:{}})
+        .then(res => {
+        })
 
-    useEffect( () => {
-        console.log(kind_exercise)
-    }, [kind_exercise])
+        if (exercise !== 'Select Exercise') {
+            api.get('/video_load', { params: { category: category, exercise: exercise }, responseType: 'blob' })
+                .then(res => {
+                    const blob = new Blob([res.data], { type: res.data.type });
+                    setSampleVideo(URL.createObjectURL(blob));
+                })
+                .catch(err => {
+                    console.log("Error is occur", err)
+                })
+        }
+    }, [number_category, number_exercise])
+
+    useEffect(() => {
+        setVideoKey(prev => prev + 1)
+    }, [sampleVideoURL])
+
     return (
-
         <div className="result_main">
-            <video className="videoPlay_css" key={videokey} controls width='500vm' height='400vm'>
-                <source src="video1.mp4" type="video/mp4"></source>
+
+            <video id='samplevideo' className="videoPlay_css" key={videokey} autoPlay={true} controls width='500vm' height='400vm' onEnded={() => {
+                const video = document.getElementById('samplevideo')
+                video.currentTime = 0;
+                video.play()
+            }}>
+                <source src={sampleVideoURL} type="video/mp4"></source>
             </video>
+
             <div className="d-flex justify-content-center align-itmes-center">
-                <select className="form-control category_exercise_css" onChange={(e) => {
-                    const newData = {...kind_exercise, category:e.target.value}
-                    setKindExercise(newData)
+
+                <select ref={selectCategoryRef} disabled={isSelectDisabled} className="form-control category_exercise_css" onChange={(e) => {
+                    setNumberCategory(e.target.value)
+                    // const newData = { ...stateResultData, kind_exercise: { ...stateResultData.kind_exercise, category: e.target.value } }
+                    // setStateResultData(newData)
                 }}>
                     {
                         select_exercise_category.map((item, index) => ((
@@ -47,9 +78,10 @@ function Result() {
                     }
                 </select>
 
-                <select className="form-control category_exercise_css" onChange={(e) => {
-                    const newData = {...kind_exercise, exercise_kind:e.target.value}
-                    setKindExercise(newData)
+                <select ref={selectExerciseRef} disabled={isSelectDisabled} className="form-control category_exercise_css" onChange={(e) => {
+                    setNumberExercise(e.target.value)
+                    // const newData = { ...stateResultData, kind_exercise: { ...stateResultData.kind_exercise, exercise_number: e.target.value } }
+                    // setStateResultData(newData)
                 }}>
                     {
                         select_kind_exercise.map((item, index) => ((
@@ -57,12 +89,27 @@ function Result() {
                         )))
                     }
                 </select>
-            </div>
-            <button className="btn_start">
-                Start
-            </button>
-        </div>
 
+            </div>
+
+            <button className="btn_start" onClick={(e) => {
+                setIsSelectDisabled(!isSelectDisabled)
+                if (stateResultData.btnStateStart === false) {
+                    setBtnName("Stop")
+                    const new_data = { ...stateResultData, btnStateStart: true }
+                    setStateResultData(new_data)
+                }
+
+                else {
+                    const new_data = { ...stateResultData, btnStateStart: false }
+                    setStateResultData(new_data)
+                    setBtnName("Start")
+                }
+            }}>
+                {btn_name}
+            </button>
+
+        </div>
     )
 }
 

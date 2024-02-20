@@ -6,16 +6,16 @@ import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { Pose } from "@mediapipe/pose";
 import api from '../../service/axios'
 
-function Camera() {
+function Camera({ setStateResultData, stateResultData }) {
     const canvasRef = useRef(null)
     const videoRef = useRef(null)
     const poseRef = useRef(null);
-    const [stateVideoPlay, setVideoPlay] = useState(false)
-    const [accuracy, setAccuracy] = useState('')
+    const [accuracy, setAccuracy] = useState(0)
     const [counter, setCounter] = useState(0)
-    const [api_url, setapiURL] = useState('exercise_1')
     const [cambtn_classname, setCamBtnClassName] = useState('btn_camera')
     const [cambtnsvg_classname, setCamBtnSVGClassName] = useState('svg_css')
+    const [counter_classname, setCounterClassName] = useState('counter_css')
+    const [api_url, setAPI_URL] = useState('exercise_1')
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
         const videoElement = videoRef.current;
@@ -52,49 +52,48 @@ function Camera() {
         minTrackingConfidence: 0.5,
     });
 
-
     useEffect(() => {
 
-        if (stateVideoPlay == true) {
+        if (stateResultData.btnStateStart === true) {
             videoRef.current.play()
-            // var myInterval = setInterval(() => {
-            //     const video = videoRef.current;
-            //     if (video)
-            //         poseRef.current.send({ image: video });
-            // }, 80);
-            // return () => {
-            //     clearInterval(myInterval);
-            // }
+            var myInterval = setInterval(() => {
+                const video = videoRef.current;
+                if (video)
+                    poseRef.current.send({ image: video });
+            }, 80);
+            return () => {
+                clearInterval(myInterval);
+            }
         }
-    }, [stateVideoPlay])
+    }, [stateResultData.btnStateStart])
 
-    // useEffect(() => {
-    //     console.log("aoi_url:", api_url)
-    //     userPose.onResults(onResults);
-    //     poseRef.current = userPose;
-    //     return () => {
-    //         poseRef.current.close();
-    //     };
-    // }, [api_url]);
+    useEffect(() => {
+        userPose.onResults(onResults);
+        poseRef.current = userPose;
+        return () => {
+            poseRef.current.close();
+        };
+    }, [stateResultData.kind_exercise]);
 
     return (
         <>
+            <video ref={videoRef} width='50px' height='50px' controls>
+                <source src='video1.mp4'></source>
+            </video>
             <div className='camera-main-div'>
                 <div className='webcam-css'></div>
                 <canvas ref={canvasRef} width='1150vw' height='670vw' style={{
                     position: 'absolute',
-                    // backgroundColor: 'aqua',
                     width: '60vw',
                     display: 'flex',
                     zIndex: '0'
                 }}></canvas>
 
-                <progress min='0' max='100' value='80'
+                <progress min='0' max='100' value={accuracy}
                     style={{
                         zIndex: '1',
                         width: '1vw',
                         height: '35vw',
-                        // writingMode:'vertical-lr'
                         writingMode: 'vertical-rl',
                         marginLeft: '60vw',
                         accentColor: 'aqua',
@@ -124,9 +123,9 @@ function Camera() {
                         />
                     </svg>
                 </button>
-                <p className='accuracy_css_best'>60.86%</p>
+                <p className='accuracy_css_best'>{accuracy + "%"}</p>
                 <div className='counter_background_css'>
-                    <p className='counter_css'>1</p>
+                    <p className={counter_classname}>{counter}</p>
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-exports.exercise1 = (results, dot1, dot2, dot3) => {
+exports.Angle_3_point = (results, dot1, dot2, dot3) => {
     const point1 = results.poseLandmarks[dot1]
     const point2 = results.poseLandmarks[dot2]
     const point3 = results.poseLandmarks[dot3]
@@ -13,11 +13,6 @@ exports.exercise1 = (results, dot1, dot2, dot3) => {
     const cosAngle = dotProduct / (magnitude1 * magnitude2);
     const angleInRadians = Math.acos(cosAngle);
     const angleInDegrees = angleInRadians * (180 / Math.PI);
-    const accuracy = (180 - angleInDegrees) * 100 / 90
-    // if(accuracy > 100) accuracy = 100
-    // else if(accuracy < 0) accuracy = 0
 
-    // return angleInDegrees;
-    return accuracy;
+    return angleInDegrees;
 }
-

@@ -16,7 +16,7 @@ function Camera({ setStateResultData, stateResultData }) {
     const [cambtn_classname, setCamBtnClassName] = useState('btn_camera')
     const [cambtnsvg_classname, setCamBtnSVGClassName] = useState('svg_css')
     const [counter_classname, setCounterClassName] = useState('counter_css')
-    const [api_url, setAPI_URL] = useState('')
+    const [state_change_exercise, setState_Change_Exercise] = useState(false)
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
         const videoElement = videoRef.current;
@@ -30,10 +30,10 @@ function Camera({ setStateResultData, stateResultData }) {
             drawConnectors(canvasCtx, results.poseLandmarks, mediapipePose.POSE_CONNECTIONS, { color: 'white', lineWidth: 1.5 });
             drawLandmarks(canvasCtx, results.poseLandmarks, { color: 'gray', lineWidth: 1, fillColor: 'gray', radius: '2' });
         }
-        api.post(`/${api_url}`, results)
+        api.post('/training', {data:results, kind_exercise:stateResultData.kind_exercise, state_change_exercise:state_change_exercise})
             .then((res) => {
                 const newdata = res.data
-                console.log(newdata)
+                // console.log(newdata.state)
                 setCounter(newdata.counter)
                 setAccuracy(newdata.accuracy)
             })
@@ -61,7 +61,7 @@ function Camera({ setStateResultData, stateResultData }) {
                 const video = videoRef.current;
                 if (video)
                     poseRef.current.send({ image: video });
-            }, 85);
+            }, 200);
             return () => {
                 clearInterval(myInterval);
             }
@@ -69,17 +69,18 @@ function Camera({ setStateResultData, stateResultData }) {
     }, [stateResultData.btnStateStart])
 
     useEffect(() => {
-        const new_api_url = Url_BackEnd(stateResultData.kind_exercise)
-        setAPI_URL(new_api_url)
+        if(state_change_exercise === true) setState_Change_Exercise(false)
+        else if(state_change_exercise === false) setState_Change_Exercise(true)
     }, [stateResultData.kind_exercise]);
 
     useEffect(() => {
+        console.log(state_change_exercise)
         userPose.onResults(onResults);
         poseRef.current = userPose;
         return () => {
             poseRef.current.close();
         };
-    }, [api_url])
+    }, [state_change_exercise])
     return (
         <>
             <video ref={videoRef} width='50px' height='50px' controls>

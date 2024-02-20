@@ -10,8 +10,8 @@ function App() {
   const [stateResultData, setStateResultData] = useState({
     btnStateStart: false,
     kind_exercise: {
-      category: 'Gym',
-      exercise_number: 'exercise_1'
+      category: '',
+      exercise: ''
     }
   })
 

@@ -26,7 +26,7 @@ router.get('/changed_exercise', (req, res) => {
 })
 
 router.post('/exercise_1', (req, res) => {
-    
+    // console.log("ok1")
     results_data = req.body
     landmark1 = config.index_landmark.right_shoulder
     landmark2 = config.index_landmark.right_hip
@@ -45,6 +45,7 @@ router.post('/exercise_1', (req, res) => {
 })
 
 router.post('/exercise_2', (req, res) => {
+    // console.log("ok2")
     results_data = req.body
     landmark1 = config.index_landmark.right_shoulder
     landmark2 = config.index_landmark.right_hip

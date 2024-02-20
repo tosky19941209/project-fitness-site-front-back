@@ -4,6 +4,7 @@ import { ReactDOM } from "react";
 import * as mediapipePose from "@mediapipe/pose";
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { Pose } from "@mediapipe/pose";
+import { Url_BackEnd } from '../../function_set/backendUrl';
 import api from '../../service/axios'
 
 function Camera({ setStateResultData, stateResultData }) {
@@ -15,7 +16,7 @@ function Camera({ setStateResultData, stateResultData }) {
     const [cambtn_classname, setCamBtnClassName] = useState('btn_camera')
     const [cambtnsvg_classname, setCamBtnSVGClassName] = useState('svg_css')
     const [counter_classname, setCounterClassName] = useState('counter_css')
-    const [api_url, setAPI_URL] = useState('exercise_1')
+    const [api_url, setAPI_URL] = useState('')
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
         const videoElement = videoRef.current;
@@ -29,10 +30,10 @@ function Camera({ setStateResultData, stateResultData }) {
             drawConnectors(canvasCtx, results.poseLandmarks, mediapipePose.POSE_CONNECTIONS, { color: 'white', lineWidth: 1.5 });
             drawLandmarks(canvasCtx, results.poseLandmarks, { color: 'gray', lineWidth: 1, fillColor: 'gray', radius: '2' });
         }
-        // console.log(typeof results)
         api.post(`/${api_url}`, results)
             .then((res) => {
                 const newdata = res.data
+                console.log(newdata)
                 setCounter(newdata.counter)
                 setAccuracy(newdata.accuracy)
             })
@@ -68,13 +69,17 @@ function Camera({ setStateResultData, stateResultData }) {
     }, [stateResultData.btnStateStart])
 
     useEffect(() => {
+        const new_api_url = Url_BackEnd(stateResultData.kind_exercise)
+        setAPI_URL(new_api_url)
+    }, [stateResultData.kind_exercise]);
+
+    useEffect(() => {
         userPose.onResults(onResults);
         poseRef.current = userPose;
         return () => {
             poseRef.current.close();
         };
-    }, [stateResultData.kind_exercise]);
-
+    }, [api_url])
     return (
         <>
             <video ref={videoRef} width='50px' height='50px' controls>

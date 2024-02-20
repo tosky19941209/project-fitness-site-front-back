@@ -35,6 +35,12 @@ function Result({ setStateResultData, stateResultData }) {
         const exercise = selectExerciseRef.current.value
         api.get('changed_exercise', {params:{}})
         .then(res => {
+            const json_exercsise = {
+                category:category,
+                exercise:exercise
+            }
+            const new_data = {...stateResultData, kind_exercise:json_exercsise}
+            setStateResultData(new_data)
         })
 
         if (exercise !== 'Select Exercise') {

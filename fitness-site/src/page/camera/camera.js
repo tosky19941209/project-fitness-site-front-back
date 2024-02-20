@@ -30,10 +30,13 @@ function Camera({ setStateResultData, stateResultData }) {
             drawConnectors(canvasCtx, results.poseLandmarks, mediapipePose.POSE_CONNECTIONS, { color: 'white', lineWidth: 1.5 });
             drawLandmarks(canvasCtx, results.poseLandmarks, { color: 'gray', lineWidth: 1, fillColor: 'gray', radius: '2' });
         }
-        api.post('/training', {data:results, kind_exercise:stateResultData.kind_exercise, state_change_exercise:state_change_exercise})
+        // api.post('/training', {data:results, kind_exercise:stateResultData.kind_exercise, state_change_exercise:state_change_exercise})
+        api.post('/webcam_model', {data:results, kind_exercise:stateResultData.kind_exercise, state_change_exercise:state_change_exercise})
             .then((res) => {
-                const newdata = res.data
-                // console.log(newdata.state)
+                const newdata = res.data.data.poseLandmarks[0]
+                // const newdata = res.data
+                
+                console.log(newdata)
                 setCounter(newdata.counter)
                 setAccuracy(newdata.accuracy)
             })

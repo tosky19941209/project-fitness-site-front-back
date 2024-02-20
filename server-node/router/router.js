@@ -39,29 +39,9 @@ router.post('/training', (req, res) => {
     }
 })
 
-
-router.post('/exercise_1', (req, res) => {
-    // console.log("ok1")
+router.post('/webcam_model', (req, res) => {
     results_data = req.body
-    landmark1 = config.index_landmark.right_shoulder
-    landmark2 = config.index_landmark.right_hip
-    landmark3 = config.index_landmark.right_ankle
-
-    const accuracy = exercise1(results_data, landmark1, landmark2, landmark3)
-    const new_accuracy = accuracy.toFixed(decimal_point)
-    if (new_accuracy > 80 && state_counter === false) {
-        counter++;
-        state_counter = true;
-    }
-    else if (new_accuracy < 20) {
-        state_counter = false;
-    }
-    res.send({ accuracy: new_accuracy, counter: counter, kind_exercise: 'exercise_1' })
+    res.send(results_data)
 })
-
-
-
-
-
 
 module.exports = router

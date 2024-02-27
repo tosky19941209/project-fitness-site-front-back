@@ -23,7 +23,9 @@ export const kind_select = {
         'ceiling-look-stretch',
         'chest-out-hands-behind-hold',
         'circles-knee-stretch',
-        'cobra-side-abdominal-stretch'
+        'cobra-side-abdominal-stretch',
+        'cobra-yoga-pose-hold',
+        'crouching-heel-back-calf-stretch'
 
     ]
 }

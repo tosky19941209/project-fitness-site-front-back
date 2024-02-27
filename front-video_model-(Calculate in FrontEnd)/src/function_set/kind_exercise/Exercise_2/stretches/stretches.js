@@ -62,5 +62,11 @@ export const Stretches = (calc_data) => {
     if (exercise === 'cobra-side-abdominal-stretch')
         return exercise_stretches.cobra_side_abdominal_stretch(calc_data)
 
+    if (exercise === 'cobra-yoga-pose-hold')
+        return exercise_stretches.cobra_yoga_pose_hold(calc_data)
+
+    if (exercise === 'crouching-heel-back-calf-stretch')
+        return exercise_stretches.crouching_heel_back_calf_stretch(calc_data)
+
 }
 

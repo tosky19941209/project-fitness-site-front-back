@@ -85,5 +85,8 @@ export const Stretches = (calc_data) => {
 
     if (exercise === 'kneeling-hip-flexor-stretch')
         return exercise_stretches.kneeling_hip_flexor_stretch(calc_data)
+
+    if (exercise === 'kneeling-lat-floor-stretch')
+        return exercise_stretches.kneeling_lat_floor_stretch(calc_data)
 }
 

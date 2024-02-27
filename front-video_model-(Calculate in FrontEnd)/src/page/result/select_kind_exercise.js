@@ -36,7 +36,8 @@ export const kind_select = {
         'kneeling-wrist-flexor-stretch',
         'knee-to-chest-stretch',
         'leg-extended-stretch',
-        'legs-hand-reach-spine-stretch'
+        'legs-hand-reach-spine-stretch',
+        'lying-hip-flexor-stretch'
 
     ]
 }

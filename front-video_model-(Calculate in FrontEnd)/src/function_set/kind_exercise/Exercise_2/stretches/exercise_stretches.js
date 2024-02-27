@@ -1080,7 +1080,7 @@ export const kneeling_lat_floor_stretch = (calc_data) => {
     const landmark3 = config.index_landmark.left_knee
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    let accuracy =  (70 - angle_1) * 100 / 30
+    let accuracy = (70 - angle_1) * 100 / 30
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1116,7 +1116,7 @@ export const kneeling_wrist_flexor_stretch = (calc_data) => {
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
 
-    let accuracy =  (80 - angle_1) * 100 / 20
+    let accuracy = (80 - angle_1) * 100 / 20
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1154,7 +1154,7 @@ export const knee_to_chest_stretch = (calc_data) => {
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
 
-    let accuracy =  (180 - angle_1) * 100 / 150
+    let accuracy = (180 - angle_1) * 100 / 150
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1198,17 +1198,17 @@ export const leg_extended_stretch = (calc_data) => {
     let angle_2 = Angle_3_point(pose_data, landmark4, landmark5, landmark6)
 
     let accuracy = 0
-    if (angle_2 > 60 && angle_2 < 130){
+    if (angle_2 > 60 && angle_2 < 130) {
         accuracy = 100 - (180 - angle_1) * 100 / 80
 
         if (accuracy > 100) accuracy = 100
         else if (accuracy < 0) accuracy = 0
-    
+
         if (accuracy > max_score && state_counter === false) {
             counter = counter + 1;
             state_counter = true;
         }
-    
+
         else if (accuracy < min_score) {
             state_counter = false;
         }
@@ -1216,4 +1216,48 @@ export const leg_extended_stretch = (calc_data) => {
     const new_accuracy = Number(accuracy.toFixed(decimal_point));
     return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
 
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const legs_hand_reach_spine_stretch = (calc_data) => {
+
+    const state_change_exercise = calc_data.state_change_exercise
+    const pose_data = calc_data.pose_data
+    if (prevstatevalue === state_change_exercise) {
+        prevstatevalue = state_change_exercise
+    }
+    else {
+        counter = 0
+        state_counter = true
+        prevstatevalue = state_change_exercise
+    }
+    const landmark1 = config.index_landmark.right_knee
+    const landmark2 = config.index_landmark.right_hip
+    const landmark3 = config.index_landmark.right_shoulder
+
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+
+    let accuracy = (100 - angle_1) * 100 / 35
+
+    if (accuracy > 100) accuracy = 100
+    else if (accuracy < 0) accuracy = 0
+
+    if (accuracy > max_score && state_counter === false) {
+        counter = counter + 1;
+        state_counter = true;
+    }
+    else if (accuracy < min_score) {
+        state_counter = false;
+    }
+
+    const new_accuracy = Number(accuracy.toFixed(decimal_point));
+    return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const lying_hip_flexor_stretch = (calc_data) => {
+    
 }

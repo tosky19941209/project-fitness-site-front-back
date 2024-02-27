@@ -83,8 +83,8 @@ function Camera({ setStateResultData, stateResultData }) {
                     kind_exercise: stateResultData.kind_exercise,
                     state_change_exercise: state_change_exercise
                 }
-                // const result = Analysis_exercise(new_calc_data)
-                setCalcResult(Analysis_exercise(new_calc_data));
+                const result = Analysis_exercise(new_calc_data)
+                // setCalcResult(Analysis_exercise(new_calc_data));
             }
             else {
                 setTipSpeaker("Your entire body must be in camera")

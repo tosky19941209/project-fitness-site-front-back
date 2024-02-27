@@ -77,5 +77,7 @@ export const Stretches = (calc_data) => {
     if (exercise === 'fixed-bar-stretch')
         return exercise_stretches.fixed_bar_stretch(calc_data)
 
+    if (exercise === 'hamstring-lying-curl-up-stretch')
+        return exercise_stretches.hamstring_lying_curl_up_stretch(calc_data)
 }
 

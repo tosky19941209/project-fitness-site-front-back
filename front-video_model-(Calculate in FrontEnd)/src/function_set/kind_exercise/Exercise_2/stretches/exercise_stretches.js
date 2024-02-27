@@ -937,3 +937,5 @@ export const fixed_bar_stretch = (calc_data) => {
     return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
 
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////

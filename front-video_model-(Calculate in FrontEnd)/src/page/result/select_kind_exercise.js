@@ -28,7 +28,8 @@ export const kind_select = {
         'crouching-heel-back-calf-stretch',
         'dynamic-arm-swing-back-stretch',
         'elbow-back-stretch',
-        'fixed-bar-stretch'
+        'fixed-bar-stretch',
+        'hamstring-lying-curl-up-stretch'
 
     ]
 }

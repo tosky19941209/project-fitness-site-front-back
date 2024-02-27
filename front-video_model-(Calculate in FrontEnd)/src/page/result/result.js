@@ -134,6 +134,13 @@ function Result({ setStateResultData, stateResultData }) {
 
             </div>
 
+            <button className="btn_save" onClick={(e) => {
+                alert("Saved Successfully")
+            }}>
+                save
+            </button>
+
+
             <button className="btn_start" onClick={(e) => {
                 if (isSelectDisabled === true)
                     setIsSelectDisabled(false)
@@ -160,6 +167,9 @@ function Result({ setStateResultData, stateResultData }) {
             }}>
                 {btn_name}
             </button>
+
+
+
 
         </div>
     )

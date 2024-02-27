@@ -27,7 +27,8 @@ export const kind_select = {
         'cobra-yoga-pose-hold',
         'crouching-heel-back-calf-stretch',
         'dynamic-arm-swing-back-stretch',
-        'elbow-back-stretch'
+        'elbow-back-stretch',
+        'fixed-bar-stretch'
 
     ]
 }

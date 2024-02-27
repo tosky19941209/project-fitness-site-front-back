@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p className='Title-style'>Fitness Exercise 1.0.2</p>
+        <p className='Title-style'>Fitness Exercise 1.0.3</p>
         <div className='App-dashboard'>
           {/* <Test></Test> */}
           <Camera setStateResultData={setStateResultData} stateResultData={stateResultData} ></Camera>

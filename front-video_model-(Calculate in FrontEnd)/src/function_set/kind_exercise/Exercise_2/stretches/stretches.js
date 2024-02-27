@@ -74,5 +74,8 @@ export const Stretches = (calc_data) => {
     if (exercise === 'elbow-back-stretch')
         return exercise_stretches.elbow_back_stretch(calc_data)
 
+    if (exercise === 'fixed-bar-stretch')
+        return exercise_stretches.fixed_bar_stretch(calc_data)
+
 }
 

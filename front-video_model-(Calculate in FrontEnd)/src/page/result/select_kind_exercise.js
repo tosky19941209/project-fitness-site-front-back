@@ -32,7 +32,8 @@ export const kind_select = {
         'hamstring-lying-curl-up-stretch',
         'hamstring-lying-straight-leg-stretch',
         'kneeling-hip-flexor-stretch',
-        'kneeling-lat-floor-stretch'
+        'kneeling-lat-floor-stretch',
+        'kneeling-wrist-flexor-stretch'
 
     ]
 }

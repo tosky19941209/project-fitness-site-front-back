@@ -1,2 +1,4 @@
-/fitness-site/node_modules
-/server-node/node_modules
+/front-video_model-(Calculate in FrontEnd)/node_modules
+/front-webcam_model-(Calculate in FrontEnd)/node_modules
+/front-webcam-old/node_modules
+/node_backend_fitness/node_modules

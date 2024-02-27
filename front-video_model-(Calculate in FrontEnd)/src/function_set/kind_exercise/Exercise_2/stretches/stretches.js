@@ -102,5 +102,8 @@ export const Stretches = (calc_data) => {
 
     if (exercise === 'lying-hip-flexor-stretch')
         return exercise_stretches.lying_hip_flexor_stretch(calc_data)
+
+    if (exercise === 'overhead-triceps-stretch-side-angle')
+        return exercise_stretches.overhead_triceps_stretch_side_angle(calc_data)
 }
 

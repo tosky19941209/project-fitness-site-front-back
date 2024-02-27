@@ -96,5 +96,8 @@ export const Stretches = (calc_data) => {
 
     if (exercise === 'leg-extended-stretch')
         return exercise_stretches.leg_extended_stretch(calc_data)
+
+    if (exercise === 'legs-hand-reach-spine-stretch')
+        return exercise_stretches.legs_hand_reach_spine_stretch(calc_data)
 }
 

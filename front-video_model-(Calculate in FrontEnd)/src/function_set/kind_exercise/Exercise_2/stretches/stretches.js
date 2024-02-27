@@ -58,7 +58,7 @@ export const Stretches = (calc_data) => {
 
     if (exercise === 'circles-knee-stretch')
         return exercise_stretches.circles_knee_stretch(calc_data)
-    
+
     if (exercise === 'cobra-side-abdominal-stretch')
         return exercise_stretches.cobra_side_abdominal_stretch(calc_data)
 
@@ -90,5 +90,11 @@ export const Stretches = (calc_data) => {
         return exercise_stretches.kneeling_lat_floor_stretch(calc_data)
     if (exercise === 'kneeling-wrist-flexor-stretch')
         return exercise_stretches.kneeling_wrist_flexor_stretch(calc_data)
+
+    if (exercise === 'knee-to-chest-stretch')
+        return exercise_stretches.knee_to_chest_stretch(calc_data)
+
+    if (exercise === 'leg-extended-stretch')
+        return exercise_stretches.leg_extended_stretch(calc_data)
 }
 

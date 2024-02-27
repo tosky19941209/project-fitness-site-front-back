@@ -1008,8 +1008,8 @@ export const hamstring_lying_straight_leg_stretch = (calc_data) => {
     const landmark2 = config.index_landmark.right_hip
     const landmark3 = config.index_landmark.right_ankle
 
-    const angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    const accuracy = (180 - angle_1) * 100 / 90
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+    let accuracy = (180 - angle_1) * 100 / 90
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1044,8 +1044,8 @@ export const kneeling_hip_flexor_stretch = (calc_data) => {
     const landmark2 = config.index_landmark.right_hip
     const landmark3 = config.index_landmark.left_knee
 
-    const angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    const accuracy = 100 - (105 - angle_1) * 100 / 10
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+    let accuracy = 100 - (105 - angle_1) * 100 / 10
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1075,12 +1075,12 @@ export const kneeling_lat_floor_stretch = (calc_data) => {
         state_counter = true
         prevstatevalue = state_change_exercise
     }
-    const landmark1 = config.index_landmark.nose
-    const landmark2 = config.index_landmark.right_hip
-    const landmark3 = config.index_landmark.right_knee
+    const landmark1 = config.index_landmark.left_shoulder
+    const landmark2 = config.index_landmark.left_hip
+    const landmark3 = config.index_landmark.left_knee
 
-    const angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    const accuracy =  (60 - angle_1) * 100 / 30
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+    let accuracy =  (70 - angle_1) * 100 / 30
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -1098,3 +1098,78 @@ export const kneeling_lat_floor_stretch = (calc_data) => {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
+export const kneeling_wrist_flexor_stretch = (calc_data) => {
+
+    const state_change_exercise = calc_data.state_change_exercise
+    const pose_data = calc_data.pose_data
+    if (prevstatevalue === state_change_exercise) {
+        prevstatevalue = state_change_exercise
+    }
+    else {
+        counter = 0
+        state_counter = true
+        prevstatevalue = state_change_exercise
+    }
+    const landmark1 = config.index_landmark.right_hip
+    const landmark2 = config.index_landmark.right_knee
+    const landmark3 = config.index_landmark.right_ankle
+
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+
+    let accuracy =  (80 - angle_1) * 100 / 20
+
+    if (accuracy > 100) accuracy = 100
+    else if (accuracy < 0) accuracy = 0
+
+    if (accuracy > max_score && state_counter === false) {
+        counter = counter + 1;
+        state_counter = true;
+    }
+
+    else if (accuracy < min_score) {
+        state_counter = false;
+    }
+    const new_accuracy = Number(accuracy.toFixed(decimal_point));
+    return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export const knee_to_chest_stretch = (calc_data) => {
+
+    const state_change_exercise = calc_data.state_change_exercise
+    const pose_data = calc_data.pose_data
+    if (prevstatevalue === state_change_exercise) {
+        prevstatevalue = state_change_exercise
+    }
+    else {
+        counter = 0
+        state_counter = true
+        prevstatevalue = state_change_exercise
+    }
+    const landmark1 = config.index_landmark.right_knee
+    const landmark2 = config.index_landmark.right_hip
+    const landmark3 = config.index_landmark.right_shoulder
+
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+
+    let accuracy =  (180 - angle_1) * 100 / 150
+
+    if (accuracy > 100) accuracy = 100
+    else if (accuracy < 0) accuracy = 0
+
+    if (accuracy > max_score && state_counter === false) {
+        counter = counter + 1;
+        state_counter = true;
+    }
+
+    else if (accuracy < min_score) {
+        state_counter = false;
+    }
+    const new_accuracy = Number(accuracy.toFixed(decimal_point));
+    return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////

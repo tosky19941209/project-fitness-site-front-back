@@ -68,5 +68,11 @@ export const Stretches = (calc_data) => {
     if (exercise === 'crouching-heel-back-calf-stretch')
         return exercise_stretches.crouching_heel_back_calf_stretch(calc_data)
 
+    if (exercise === 'dynamic-arm-swing-back-stretch')
+        return exercise_stretches.dynamic_arm_swing_back_stretch(calc_data)
+
+    if (exercise === 'elbow-back-stretch')
+        return exercise_stretches.elbow_back_stretch(calc_data)
+
 }
 

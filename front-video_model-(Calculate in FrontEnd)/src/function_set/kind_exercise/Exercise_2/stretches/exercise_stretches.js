@@ -793,7 +793,7 @@ export const crouching_heel_back_calf_stretch = (calc_data) => {
     const landmark3 = config.index_landmark.right_hip
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    let accuracy = angle_1 
+    let accuracy = angle_1
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -879,7 +879,7 @@ export const elbow_back_stretch = (calc_data) => {
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
 
-    let accuracy =  (180 - angle_1) * 100 / 20
+    let accuracy = (180 - angle_1) * 100 / 20
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -919,7 +919,7 @@ export const fixed_bar_stretch = (calc_data) => {
     const landmark3 = config.index_landmark.right_shoulder
 
     let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
-    let accuracy =  (140 - angle_1) * 100 / 40
+    let accuracy = (140 - angle_1) * 100 / 40
 
     if (accuracy > 100) accuracy = 100
     else if (accuracy < 0) accuracy = 0
@@ -939,3 +939,56 @@ export const fixed_bar_stretch = (calc_data) => {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+export const hamstring_lying_curl_up_stretch = (calc_data) => {
+
+    const state_change_exercise = calc_data.state_change_exercise
+    const pose_data = calc_data.pose_data
+
+    if (prevstatevalue === state_change_exercise) {
+        prevstatevalue = state_change_exercise
+    }
+    else {
+        counter = 0
+        state_counter = true
+        prevstatevalue = state_change_exercise
+    }
+
+    const landmark1 = config.index_landmark.right_knee
+    const landmark2 = config.index_landmark.right_hip
+    const landmark3 = config.index_landmark.right_shoulder
+
+    const landmark4 = config.index_landmark.right_hip
+    const landmark5 = config.index_landmark.right_knee
+    const landmark6 = config.index_landmark.right_ankle
+
+
+
+    let angle_1 = Angle_3_point(pose_data, landmark1, landmark2, landmark3)
+    let angle_2 = Angle_3_point(pose_data, landmark4, landmark5, landmark6)
+
+    let accuracy = 0
+    if (angle_1 > 80 && angle_1 < 120) {
+
+        accuracy = 100 - (180 - angle_2) * 100 / 90
+
+        if (accuracy > 100) accuracy = 100
+        else if (accuracy < 0) accuracy = 0
+
+        if (accuracy > max_score && state_counter === false) {
+            counter = counter + 1;
+            state_counter = true;
+        }
+
+        else if (accuracy < min_score) {
+            state_counter = false;
+        }
+    }
+
+
+
+    const new_accuracy = Number(accuracy.toFixed(decimal_point))
+    return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////

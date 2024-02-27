@@ -82,5 +82,8 @@ export const Stretches = (calc_data) => {
 
     if (exercise === 'hamstring-lying-straight-leg-stretch')
         return exercise_stretches.hamstring_lying_straight_leg_stretch(calc_data)
+
+    if (exercise === 'kneeling-hip-flexor-stretch')
+        return exercise_stretches.kneeling_hip_flexor_stretch(calc_data)
 }
 

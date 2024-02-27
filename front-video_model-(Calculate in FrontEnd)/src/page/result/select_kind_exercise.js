@@ -30,7 +30,8 @@ export const kind_select = {
         'elbow-back-stretch',
         'fixed-bar-stretch',
         'hamstring-lying-curl-up-stretch',
-        'hamstring-lying-straight-leg-stretch'
+        'hamstring-lying-straight-leg-stretch',
+        'kneeling-hip-flexor-stretch'
 
     ]
 }

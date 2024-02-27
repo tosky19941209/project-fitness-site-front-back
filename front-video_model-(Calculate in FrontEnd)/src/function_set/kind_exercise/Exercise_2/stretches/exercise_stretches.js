@@ -1022,3 +1022,5 @@ export const hamstring_lying_straight_leg_stretch = (calc_data) => {
     const new_accuracy = Number(accuracy.toFixed(decimal_point));
     return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
 }
+
+//////////////////////////////////////////////////////////////////////////

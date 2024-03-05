@@ -13,14 +13,17 @@ const fitnessSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    weight: {
-        type: String,
-        required: false
-    },
-    // height: {
-    //     type: String,
-    //     required: false
-    // }
+
+    personalInfo:{
+        weight: {
+            type: String,
+            required: false
+        },
+        height: {
+            type: String,
+            required: false
+        }
+    }
 
 
 });

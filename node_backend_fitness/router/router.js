@@ -21,11 +21,10 @@ router.get('/changed_exercise', (req, res) => {
     res.send("success")
 })
 
-router.get('/regist_exercise', (req, res) => {
+router.post('/signup', (req, res) => {
     const mongo_model = require('../config/model/model')
-
-    const {username, password} = req.query
-    const newData = new mongo_model({username, password})
+    const {username, password, email, height, weight} = req.query
+    const newData = new mongo_model(req.query)
     console.log(newData)
     newData.save()
     .then(() => { 

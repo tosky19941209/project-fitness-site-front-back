@@ -1292,3 +1292,6 @@ export const lying_hip_flexor_stretch = (calc_data) => {
     return { accuracy: new_accuracy, counter: counter, state: state_change_exercise }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const overhead_triceps_stretch_side_angle = (calc_data) => {
+    
+}

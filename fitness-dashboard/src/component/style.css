@@ -1,0 +1,43 @@
+:root{
+    --left-width:25vw;
+    --right-width:75vw;
+    --main-height:100vh;
+    --sidebar-logo-height:12vh;
+    --sidebar-main-height:65vh;
+    --sidebar-foot-height:15vh;
+}
+
+.SideBar-main{
+    display: flex;
+    flex-direction: column;
+    width:var(--left-width);
+    height: var(--main-height);
+    background-color: #5534a5;
+}
+.logo-text{
+    font-size: 2vw;
+    margin-left: 30px;
+    color: black;
+}
+.div-logo{
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+    width:var(--left-width);
+    height: var(--sidebar-logo-height);
+}
+
+.div-sidebar-main{
+    display: flex;
+    flex-direction: column;
+    width: var(--left-width);
+    height: var(--sidebar-main-height);
+}
+
+.div-sidebar-foot{
+    display: flex;
+    flex-direction: column;
+    width: var(--left-width);
+    height: var(--sidebar-foot-height);
+}

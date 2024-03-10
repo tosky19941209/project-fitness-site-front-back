@@ -17,14 +17,10 @@ router.get('/video_load', (req, res) => {
     res.sendFile(videoPath)
 })
 
-router.get('/changed_exercise', (req, res) => {
-    res.send("success")
-})
-
 router.post('/signup', (req, res) => {
-    const mongo_model = require('../config/model/model')
-    const {username, password, email, height, weight} = req.query
-    const newData = new mongo_model(req.query)
+    const user = require('../config/model/users')
+    const {username, password, email, height, weight} = req.body
+    const newData = new user(req.body)
     console.log(newData)
     newData.save()
     .then(() => { 
@@ -34,5 +30,11 @@ router.post('/signup', (req, res) => {
         res.send("error:", err)
     })
 })
+
+router.pose('logs', (req, res) => {
+    const logs = require('../config/model/') 
+})
+
+
 
 module.exports = router

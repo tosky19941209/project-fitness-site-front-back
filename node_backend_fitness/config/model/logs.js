@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const logdb = new mongoose.SchemaType({
+const logdb = new mongoose.Schema({
     userid: {
         type: Number,
         required: false 
@@ -18,11 +18,12 @@ const logdb = new mongoose.SchemaType({
         required: false
     },
     counter: {
-        type: Number,
+        type: String,
         required: false
     },
     accuracy: {
-
+        type: String,
+        required: false
     }
 })
 

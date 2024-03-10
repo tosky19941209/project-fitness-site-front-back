@@ -4,6 +4,7 @@ const { json } = require('body-parser')
 const router = express.Router()
 const path = require('path')
 
+
 router.get('/test', (req, res) => {
     res.send("Welcome to fitness site")
 })
@@ -17,10 +18,12 @@ router.get('/video_load', (req, res) => {
     res.sendFile(videoPath)
 })
 
-router.post('/signup', (req, res) => {
+router.get('/signup', (req, res) => {
+
     const user = require('../config/model/users')
-    const {username, password, email, height, weight} = req.body
-    const newData = new user(req.body)
+
+    const {username, password, email, height, weight} = req.query
+    const newData = new user(req.query)
     console.log(newData)
     newData.save()
     .then(() => { 
@@ -31,8 +34,17 @@ router.post('/signup', (req, res) => {
     })
 })
 
-router.pose('logs', (req, res) => {
-    const logs = require('../config/model/') 
+router.get('/logs', (req, res) => {
+    const logs = require('../config/model/logs') 
+    const user = require('../config/model/users')
+
+    const {email, password} = req.query
+    console.log("ok")
+    const person = user.findOne({email, password})
+    .then( (result) => {
+        res.send(result)
+    })
+
 })
 
 

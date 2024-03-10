@@ -5,13 +5,12 @@ function SideBar({ mainContent, setMainContent }) {
         'OverView',
         'Fitness Analytics',
         'Diet Analytics',
-        'Manage My Plan',
-        'Community'
     ]
     const sideBar_Foot_Btn = [
         'Support',
         'My Profile'
     ]
+
     const [accidentID, setAccidentID] = useState(0)
     const [accidentFootID, setAccidentFootID] = useState(-1)
 
@@ -26,16 +25,18 @@ function SideBar({ mainContent, setMainContent }) {
             <div className="flex flex-col w-full h-4/6 ">
                 {
                     sideBar_Dash_Btn.map((item, index) => (
-                        <div className="flex items-center">
-                        <div className={`w-[10%] h-[50%] ${ accidentID === index ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-6%]`}/>
-                            <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl mt-3 mb-8  flex  items-center hover:text-[#5534A5]`}
+                        <div className="flex items-center w-[90%] h-[15%] mt-2 mb-2 ">
+                            <div className={`w-[10%] h-[50%] ${accidentID === index ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-5%]`} />
+                            <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl flex  items-center hover:text-[#5534A5] duration-500`}
                                 onClick={
                                     (e) => {
                                         setAccidentID(index)
                                         const newData = { ...mainContent, sideBar: index }
                                         setMainContent(newData)
-                                    }}
-                            ><img className="mr-6 ml-14" width='30px' src={`${item}.png`} /><p className="text-[15px]">{item}</p></button>
+                                    }}>
+                                <img className="mr-6 ml-14" width='40px' src={`${accidentID === index ? item+'_active.png' : item+'.png'}`} />
+                                <p className="text-[15px]">{item}</p>
+                            </button>
                         </div>
                     ))
                 }

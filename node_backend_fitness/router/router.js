@@ -223,5 +223,4 @@ router.post('/diet', (req, res) => {
         })
 })
 
-
 module.exports = router

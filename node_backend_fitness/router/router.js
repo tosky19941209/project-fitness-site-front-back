@@ -220,43 +220,8 @@ router.post('/diet', (req, res) => {
                         })
                     })
             }
-
-
         })
-
 })
 
-// router.post('/dietUpdate', (req, res) => {
-
-//     const user = require('../config/model/users')
-//     const diet = require('../config/model/diet')
-
-//     const newData = req.body
-//     const header = newData.header
-//     const { email, password } = header
-//     const updateData = newData.updateData
-
-//     user.findOne({ email, password })
-//         .then((result) => {
-//             if (result) {
-//                 diet.findOneAndUpdate({ userid: result._id }, updateData)
-//                     .then(() => {
-//                         res.status(404).json({
-//                             message: "success"
-//                         })
-//                     })
-//                     .catch((err) => {
-//                         res.status(404).json({
-//                             message: "failed"
-//                         })
-//                     })
-//             } else {
-//                 res.status(404).json({
-//                     message: "User is not registed."
-//                 })
-//             }
-//         })
-
-// })
 
 module.exports = router

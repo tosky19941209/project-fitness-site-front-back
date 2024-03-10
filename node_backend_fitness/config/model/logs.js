@@ -2,20 +2,64 @@ const mongoose = require('mongoose')
 
 const logdb = new mongoose.Schema({
     userid: {
-        type: Number,
-        required: false 
+        type: mongoose.mongo.ObjectId,
+        required: false
     },
-    exercisetype: {
+    exerciseType: {
         type: String,
-        required: false    
+        required: false
     },
     startTime: {
-        type: String,
-        required: false
+        year: {
+            type: String,
+            required: false
+        },
+        month: {
+            type: String,
+            required: false
+        },
+        date: {
+            type: String,
+            required: false
+        },
+        hour: {
+            type: String,
+            required: false
+        },
+        minute: {
+            type: String,
+            required: false
+        },
+        second: {
+            type: String,
+            required: false
+        }
     },
     endTime: {
-        type: String,
-        required: false
+        year: {
+            type: String,
+            required: false
+        },
+        month: {
+            type: String,
+            required: false
+        },
+        date: {
+            type: String,
+            required: false
+        },
+        hour: {
+            type: String,
+            required: false
+        },
+        minute: {
+            type: String,
+            required: false
+        },
+        second: {
+            type: String,
+            required: false
+        }
     },
     counter: {
         type: String,

@@ -79,33 +79,48 @@ router.post('/logs', (req, res) => {
 
     user.findOne({ email, password })
         .then((result) => {
-            const state = false
-            
-            logs.find({userid: result._id})
-            .then((response) => {
-                res.status(404).json(response)
-            })
+            let state = true
 
-            if (state) {
-                const newData = new logs({
-                    userid: result._id,
-                    exerciseType: exerciseType,
-                    startTime: startTime,
-                    endTime: endTime,
-                    counter: counter,
-                    accuracy: accuracy
-                })
-                newData.save()
-                    .then(() => {
-                        res.status(404).json({
-                            message: "success"
-                        })
+            logs.find({ userid: result._id })
+                .then((response) => {
+                    response.map((item, index) => {
+                        const existData = {
+                            exerciseType: item.exerciseType,
+                            startTime: item.startTime,
+                            endTime: item.endTime,
+                            counter: item.counter,
+                            accuracy: item.accuracy
+                        }
+                        if (newData == existData) {
+                            state = false
+                        } else {
+                            state = true
+                        }
                     })
-            } else {
-                res.status(404).json({
-                    message: "Duplicate"
                 })
-            }
+            res.status(404).json({
+                message: state
+            })
+            // if (state) {
+            //     const newData = new logs({
+            //         userid: result._id,
+            //         exerciseType: exerciseType,
+            //         startTime: startTime,
+            //         endTime: endTime,
+            //         counter: counter,
+            //         accuracy: accuracy
+            //     })
+            //     newData.save()
+            //         .then(() => {
+            //             res.status(404).json({
+            //                 message: "success"
+            //             })
+            //         })
+            // } else {
+            //     res.status(404).json({
+            //         message: "Duplicate"
+            //     })
+            // }
         })
 })
 

@@ -3,6 +3,7 @@ const config = require('../config/env/config')
 const { json } = require('body-parser')
 const router = express.Router()
 const path = require('path')
+const { rmSync } = require('fs')
 
 
 router.get('/test', (req, res) => {
@@ -72,18 +73,20 @@ router.post('/signupUpdate', (req, res) => {
 router.post('/logs', (req, res) => {
     const logs = require('../config/model/logs')
     const user = require('../config/model/users')
-    const header = req.body.header
-    const newData = req.body.updateData
+    const newData = req.body
+    const header = newData.header
+    const updateData = newData.updateData
     const { email, password } = header
-    const { exerciseType, startTime, endTime, counter, accuracy } = newData
+
+    let state = true
 
     user.findOne({ email, password })
-        .then((result) => {
-            let state = true
+        .then(async (result) => {
 
-            logs.find({ userid: result._id })
+            await logs.find({ userid: result._id })
                 .then((response) => {
                     response.map((item, index) => {
+
                         const existData = {
                             exerciseType: item.exerciseType,
                             startTime: item.startTime,
@@ -91,36 +94,42 @@ router.post('/logs', (req, res) => {
                             counter: item.counter,
                             accuracy: item.accuracy
                         }
-                        if (newData == existData) {
+
+                        const currentData = {
+                            exerciseType: updateData.exerciseType,
+                            startTime: updateData.startTime,
+                            endTime: updateData.endTime,
+                            counter: updateData.counter,
+                            accuracy: updateData.accuracy
+                        }
+                        const string1 = JSON.stringify(existData)
+                        const string2 = JSON.stringify(currentData)
+                        if (string1 === string2) {
                             state = false
-                        } else {
-                            state = true
                         }
                     })
                 })
-            res.status(404).json({
-                message: state
-            })
-            // if (state) {
-            //     const newData = new logs({
-            //         userid: result._id,
-            //         exerciseType: exerciseType,
-            //         startTime: startTime,
-            //         endTime: endTime,
-            //         counter: counter,
-            //         accuracy: accuracy
-            //     })
-            //     newData.save()
-            //         .then(() => {
-            //             res.status(404).json({
-            //                 message: "success"
-            //             })
-            //         })
-            // } else {
-            //     res.status(404).json({
-            //         message: "Duplicate"
-            //     })
-            // }
+
+            if (state) {
+                const newlog = new logs({
+                    userid: result._id,
+                    exerciseType: updateData.exerciseType,
+                    startTime: updateData.startTime,
+                    endTime: updateData.endTime,
+                    counter: updateData.counter,
+                    accuracy: updateData.accuracy
+                })
+                newlog.save()
+                    .then(() => {
+                        res.status(404).json({
+                            message: "success"
+                        })
+                    })
+            } else {
+                res.status(404).json({
+                    message: "Double"
+                })
+            }
         })
 })
 
@@ -129,54 +138,80 @@ router.post('/diet', (req, res) => {
     const diet = require('../config/model/diet')
     const newData = req.body
     const { email, password } = newData.header
-
+    const updateData = newData.updateData
     user.findOne({ email: email, password: password })
-        .then((result) => {
-            if (result) {
+        .then(async (result) => {
+            if (result === null) {
+                res.status(404).json({
+                    message: "User is not registed."
+                })
+                return
+            }
+
+            let addStatus = null
+            
+            await diet.find({ userid: result._id })
+                .then((response) => {
+                    if (response.length === 0) {
+                        addStatus = true
+                    } else {
+
+                        addStatus = true
+
+                        const currentData = {
+                            year: updateData.year,
+                            month: updateData.month,
+                            date: updateData.date,
+                            day: updateData.day,
+                        }
+
+                        response.map((item, index) => {
+                            const existData = {
+                                year: item.year,
+                                month: item.month,
+                                date: item.date,
+                                day: item.day,
+                            }
+                            const string1 = JSON.stringify(existData)
+                            const string2 = JSON.stringify(currentData)
+                            if (string1 === string2){
+                                console.log("ok")
+                                addStatus = false
+                            }
+                        })
+                    }
+                })
+
+            if (addStatus === true) {
                 const newDiet = new diet({
                     userid: result._id,
-                    year: newData.year,
-                    month: newData.month,
-                    date: newData.date,
-                    day: newData.day,
-                    meal: newData.meal,
+                    year: updateData.year,
+                    month: updateData.month,
+                    date: updateData.date,
+                    day: updateData.day,
+                    meal: updateData.meal
                 })
                 newDiet.save()
                     .then(() => {
                         res.status(404).json({
-                            message: "success"
+                            message: "added"
                         })
                     })
-                    .catch((err) => {
-                        res.status(404).json({
-                            message: "err"
-                        })
-                    })
-            } else {
-                res.status(404).json({
-                    message: "User is not registed."
-                })
             }
-        })
-})
-
-router.post('/dietUpdate', (req, res) => {
-
-    const user = require('../config/model/users')
-    const diet = require('../config/model/diet')
-
-    const newData = req.body
-    const header = newData.header
-    const { email, password } = header
-    const updateData = newData.updateData
-
-    user.findOne({ email, password })
-        .then((result) => {
-            if (result) {
-                diet.findOneAndUpdate({ userid: result._id }, updateData)
+            else {
+                await diet.findOneAndUpdate(
+                    {
+                        userid: result._id,
+                        year: updateData.year,
+                        month: updateData.month,
+                        date: updateData.date,
+                        day: updateData.day
+                    },
+                    updateData,
+                    { new: true })
                     .then(() => {
                         res.status(404).json({
-                            message: "success"
+                            message: "Updated"
                         })
                     })
                     .catch((err) => {
@@ -184,13 +219,44 @@ router.post('/dietUpdate', (req, res) => {
                             message: "failed"
                         })
                     })
-            } else {
-                res.status(404).json({
-                    message: "User is not registed."
-                })
             }
+
+
         })
 
 })
+
+// router.post('/dietUpdate', (req, res) => {
+
+//     const user = require('../config/model/users')
+//     const diet = require('../config/model/diet')
+
+//     const newData = req.body
+//     const header = newData.header
+//     const { email, password } = header
+//     const updateData = newData.updateData
+
+//     user.findOne({ email, password })
+//         .then((result) => {
+//             if (result) {
+//                 diet.findOneAndUpdate({ userid: result._id }, updateData)
+//                     .then(() => {
+//                         res.status(404).json({
+//                             message: "success"
+//                         })
+//                     })
+//                     .catch((err) => {
+//                         res.status(404).json({
+//                             message: "failed"
+//                         })
+//                     })
+//             } else {
+//                 res.status(404).json({
+//                     message: "User is not registed."
+//                 })
+//             }
+//         })
+
+// })
 
 module.exports = router

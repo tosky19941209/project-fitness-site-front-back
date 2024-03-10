@@ -22,6 +22,10 @@ const logdb = new mongoose.Schema({
             type: String,
             required: false
         },
+        day: {
+            type: String,
+            required: false
+        },
         hour: {
             type: String,
             required: false
@@ -45,6 +49,10 @@ const logdb = new mongoose.Schema({
             required: false
         },
         date: {
+            type: String,
+            required: false
+        },
+        day: {
             type: String,
             required: false
         },

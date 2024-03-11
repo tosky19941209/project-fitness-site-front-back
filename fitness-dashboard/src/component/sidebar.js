@@ -12,8 +12,10 @@ function SideBar({ mainContent, setMainContent }) {
         'My Profile'
     ]
 
-
-
+    useEffect(() => {
+        if (mainContent.sideBar === 0)
+            setAccidentID(0)
+    }, [mainContent])
 
     const [accidentID, setAccidentID] = useState(0)
     const [accidentFootID, setAccidentFootID] = useState(-1)
@@ -34,12 +36,12 @@ function SideBar({ mainContent, setMainContent }) {
                             <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl flex  items-center hover:text-[#5534A5] duration-500`}
                                 onClick={
                                     (e) => {
-                                        const email = localStorage.getItem("email")
+                                        const email = localStorage.getItem("fitnessemail")
                                         if (email) {
                                             setAccidentID(index)
                                             const newData = { ...mainContent, sideBar: index }
                                             setMainContent(newData)
-                                        }else {
+                                        } else {
                                             toastr.info("please Log in!")
                                         }
                                     }}>

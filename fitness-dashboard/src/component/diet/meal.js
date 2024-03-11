@@ -80,10 +80,13 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
         }
 
 
+        const localEmail = localStorage.getItem("fitnessemail")
+        const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
-            email: email,
-            password: password
+            email: localEmail,
+            password: localPassword
         }
+        
         const updateData = {
             year: dietPlan.year,
             month: dietPlan.month,

@@ -27,10 +27,14 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
 
     useEffect(() => {
         if(planData.year === '') return 
+
+        const localEmail = localStorage.getItem("fitnessemail")
+        const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
-            email: email,
-            password: password
+            email: localEmail,
+            password: localPassword
         }
+        
         const updateData = {
             year: planData.year,
             month: planData.month,
@@ -49,7 +53,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
 
     return (
         <div className="flex flex-col border rounded-xl w-full h-[93%] items-center">
-            <button className='border rounded-xl w-[8%] mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
+            <button className='border rounded-[50%] w-[8%] mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
                 onClick={
                     (e) => {
                         showWidget === false ? setShowWidget(true) : setShowWidget(false)

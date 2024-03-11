@@ -138,7 +138,6 @@ router.post('/setdiet', (req, res) => {
     const newData = req.body
     const { email, password } = newData.header
     const updateData = newData.updateData
-    console.log("Diet_header: ", updateData)
     user.findOne({ email: email, password: password })
         .then(async (result) => {
             if (result === null) {
@@ -230,7 +229,6 @@ router.post('/setexercise', (req, res) => {
     const header = newData.header
     const { email, password } = header
     const updateData = newData.updateData
-    console.log("Exer_header: ", updateData)
     if(updateData.year === '') return
     user.findOne({ email: email, password: password })
         .then(async (result) => {
@@ -340,7 +338,6 @@ router.get('/getexercise', async (req, res) => {
 
     const exercise = require('../config/model/exercise');
     const user = require('../config/model/users');
-    console.log("get_ex_header: ", getData)
     if (getData.year === '') {
         return;
     }
@@ -380,7 +377,6 @@ router.get('/getexercise', async (req, res) => {
 router.get('/getdiet', async (req, res) => {
     const header = req.query.header;
     const getData = req.query.getData;
-    console.log("get_diet_header: ", getData)
     const diet = require('../config/model/diet');
     const user = require('../config/model/users');
     if (getData.year === '') {

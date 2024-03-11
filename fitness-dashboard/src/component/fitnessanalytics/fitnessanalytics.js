@@ -21,9 +21,11 @@ function FitnessAnalytics({ email, password }) {
 
     useEffect(() => {
         if(planData.year === '') return
+        const localEmail = localStorage.getItem("fitnessemail")
+        const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
-            email: email,
-            password: password
+            email: localEmail,
+            password: localPassword
         }
         const getData = {
             year: planData.year,
@@ -31,7 +33,6 @@ function FitnessAnalytics({ email, password }) {
             date: planData.date,
             day: planData.day
         }
-        console.log("sended")
 
         api.get("/getexercise", {
             params: {

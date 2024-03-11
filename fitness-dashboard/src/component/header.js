@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import api from '../service/axios'
 import toastr from 'toastr';
 
-function Header( {sideBarIndex,  headerContent, setHeaderContent }) {
+function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex }) {
     const content = [
         'OverView',
         'Fitness Analytics',
         'Diet Analytics',
     ]
 
-    
+    const signInBtn = useRef(null)
 
     const [showWidget, setShowWidget] = useState(false)
     const [avatarSrc, setAvatarSrc] = useState('user.png')
@@ -17,9 +17,28 @@ function Header( {sideBarIndex,  headerContent, setHeaderContent }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const handeKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            signInBtn.current.click()
+        }
+    }
+
     useEffect(() => {
-        localStorage.clear()
+        const localEmail = localStorage.getItem("fitnessemail")
+        const localPassword = localStorage.getItem("fitnesspassword")
+        api.get('/signin', { params: { email: localEmail, password: localPassword } })
+            .then((res) => {
+                const newData = res.data
+                if (newData.message === 'success') {
+                    const name = newData.name
+                    setAvatarName(name)
+                } 
+            })
+            .catch((err) => {
+                console.log("err: ", err)
+            })
     }, [])
+
 
     const SignIn = async (e) => {
         await api.get('/signin', { params: { email: email, password: password } })
@@ -35,7 +54,8 @@ function Header( {sideBarIndex,  headerContent, setHeaderContent }) {
                     setShowWidget(false)
                     setHeaderContent(newHeader)
                     toastr.success("Welcome to fitness")
-                    localStorage.setItem('email', email)
+                    localStorage.setItem('fitnessemail', email)
+                    localStorage.setItem('fitnesspassword', password)
                 } else {
                     toastr.info("Email is not correct")
                 }
@@ -74,14 +94,14 @@ function Header( {sideBarIndex,  headerContent, setHeaderContent }) {
                                 }}></input>
 
                             <p className="text-[black] text-left text-[20px]">Password</p>
-                            <input value={password} type="password" className="form-control text-[black] mt-[-3%]"
+                            <input value={password} onKeyPress={handeKeyPress} type="password" className="form-control text-[black] mt-[-3%]"
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}></input>
 
                             <div className="flex justify-between mt-3">
 
-                                <button className="text-[#5534A5] text-[20px] ml-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
+                                <button ref={signInBtn} className="text-[#5534A5] text-[20px] ml-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
                                     onClick={SignIn}>
                                     Sign in
                                 </button>
@@ -89,8 +109,11 @@ function Header( {sideBarIndex,  headerContent, setHeaderContent }) {
                                 <button className="text-[#5534A5] text-[20px] mr-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
                                     onClick={(e) => {
                                         setShowWidget(false)
+                                        localStorage.clear()
+                                        setAvatarName('')
+                                        setSideBarIndex(0)
                                     }}>
-                                    Close
+                                    Sign Out
                                 </button>
                             </div>
                         </div>

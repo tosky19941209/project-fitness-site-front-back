@@ -24,6 +24,10 @@ const Userdb = new mongoose.Schema({
     height: {
         type: String,
         required: false
+    },
+    loginState:{
+        type:Boolean,
+        required:false
     }
 });
 

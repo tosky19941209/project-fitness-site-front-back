@@ -12,19 +12,27 @@ function MainBox({ mainContent, setMainContent }) {
         password: ""
     })
     const [sideBarIndex, setSideBarIndex] = useState(0)
+    const spaceTag = (<></>)
     useEffect(() => {
         setSideBarIndex(mainContent.sideBar)
     }, [mainContent.sideBar])
-    const spaceTag = (<></>)
 
+    useEffect(() => {
+        if (sideBarIndex === 0) {
+            const newData = {
+                sideBar: 0
+            }
+            setMainContent(newData)
+        }
+    }, [sideBarIndex])  
 
     return (
         <div className="flex flex-col w-[100%] h-[full]">
-            <Header sideBarIndex={sideBarIndex} headerContent={headerContent} setHeaderContent={setHeaderContent} />
+            <Header sideBarIndex={sideBarIndex} headerContent={headerContent} setHeaderContent={setHeaderContent} setSideBarIndex={setSideBarIndex} />
 
-            {mainContent.sideBar === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}
-            {mainContent.sideBar === 1 ? <FitnessAnalytics email={headerContent.email} password={headerContent.password} /> : spaceTag}
-            {mainContent.sideBar === 2 ? <Diet email={headerContent.email} password={headerContent.password} /> : spaceTag}
+            {sideBarIndex === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}
+            {sideBarIndex === 1 ? <FitnessAnalytics email={headerContent.email} password={headerContent.password} /> : spaceTag}
+            {sideBarIndex === 2 ? <Diet email={headerContent.email} password={headerContent.password} /> : spaceTag}
 
         </div>
     )

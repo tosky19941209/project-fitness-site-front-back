@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [mainContent, setMainContent] = useState({
-    sideBar: 0,
+    sideBar: 0
   })
 
   return (

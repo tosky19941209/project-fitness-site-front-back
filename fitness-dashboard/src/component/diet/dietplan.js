@@ -22,9 +22,12 @@ function DietPlan({ email, password }) {
 
     useEffect(() => {
         if(dietPlan.year === '') return
+        
+        const localEmail = localStorage.getItem("fitnessemail")
+        const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
-            email: email,
-            password: password
+            email: localEmail,
+            password: localPassword
         }
 
         const getData = {

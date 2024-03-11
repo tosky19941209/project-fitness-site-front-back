@@ -42,7 +42,6 @@ router.post('/signup', (req, res) => {
                     })
             }
         })
-
 })
 
 router.post('/signupUpdate', (req, res) => {
@@ -70,7 +69,7 @@ router.post('/signupUpdate', (req, res) => {
         });
 })
 
-router.post('/logs', (req, res) => {
+router.post('/setlogs', (req, res) => {
     const logs = require('../config/model/logs')
     const user = require('../config/model/users')
     const newData = req.body
@@ -133,12 +132,13 @@ router.post('/logs', (req, res) => {
         })
 })
 
-router.post('/diet', (req, res) => {
+router.post('/setdiet', (req, res) => {
     const user = require('../config/model/users')
     const diet = require('../config/model/diet')
     const newData = req.body
     const { email, password } = newData.header
     const updateData = newData.updateData
+    console.log("Diet_header: ", updateData)
     user.findOne({ email: email, password: password })
         .then(async (result) => {
             if (result === null) {
@@ -149,7 +149,7 @@ router.post('/diet', (req, res) => {
             }
 
             let addStatus = null
-            
+
             await diet.find({ userid: result._id })
                 .then((response) => {
                     if (response.length === 0) {
@@ -159,10 +159,10 @@ router.post('/diet', (req, res) => {
                         addStatus = true
 
                         const currentData = {
-                            year: updateData.year,
-                            month: updateData.month,
-                            date: updateData.date,
-                            day: updateData.day,
+                            year: String(updateData.year),
+                            month: String(updateData.month),
+                            date: String(updateData.date),
+                            day: String(updateData.day),
                         }
 
                         response.map((item, index) => {
@@ -174,8 +174,7 @@ router.post('/diet', (req, res) => {
                             }
                             const string1 = JSON.stringify(existData)
                             const string2 = JSON.stringify(currentData)
-                            if (string1 === string2){
-                                console.log("ok")
+                            if (string1 === string2) {
                                 addStatus = false
                             }
                         })
@@ -223,4 +222,200 @@ router.post('/diet', (req, res) => {
         })
 })
 
+
+router.post('/setexercise', (req, res) => {
+    const user = require('../config/model/users')
+    const exercise = require('../config/model/exercise')
+    const newData = req.body
+    const header = newData.header
+    const { email, password } = header
+    const updateData = newData.updateData
+    console.log("Exer_header: ", updateData)
+    if(updateData.year === '') return
+    user.findOne({ email: email, password: password })
+        .then(async (result) => {
+            if (result === null) {
+                res.status(404).json({
+                    message: "User is not registed."
+                })
+                return
+            }
+
+            let addStatus = null
+
+            await exercise.find({ userid: result._id })
+                .then((response) => {
+                    if (response.length === 0) {
+                        addStatus = true
+                    } else {
+
+                        addStatus = true
+
+                        const currentData = {
+                            year: String(updateData.year),
+                            month: String(updateData.month),
+                            date: String(updateData.date),
+                            day: String(updateData.day),
+                        }
+                        response.map((item, index) => {
+                            const existData = {
+                                year: item.year,
+                                month: item.month,
+                                date: item.date,
+                                day: item.day,
+                            }
+                            const string1 = JSON.stringify(existData)
+                            const string2 = JSON.stringify(currentData)
+                            if (string1 === string2) {
+                                addStatus = false
+                            }
+                        })
+                    }
+                })
+
+            if (addStatus === true) {
+                const newExercise = new exercise({
+                    userid: result._id,
+                    year: updateData.year,
+                    month: updateData.month,
+                    date: updateData.date,
+                    day: updateData.day,
+                    exerciseType: updateData.exerciseType
+                })
+                newExercise.save()
+                    .then(() => {
+                        res.status(404).json({
+                            message: "added"
+                        })
+                    })
+            }
+            else {
+                await exercise.findOneAndUpdate(
+                    {
+                        userid: result._id,
+                        year: updateData.year,
+                        month: updateData.month,
+                        date: updateData.date,
+                        day: updateData.day
+                    },
+                    updateData,
+                    { new: true })
+                    .then(() => {
+                        res.status(404).json({
+                            message: "Updated"
+                        })
+                    })
+                    .catch((err) => {
+                        res.status(404).json({
+                            message: "failed"
+                        })
+                    })
+            }
+        })
+})
+
+router.get('/signin', (req, res) => {
+    const users = require('../config/model/users')
+    const newData = req.query
+    const { email, password } = newData
+    users.findOne({ email })
+        .then((result) => {
+            if (result) {
+                res.json({
+                    name: result.username,
+                    message: "success"
+                })
+            } else {
+                res.json({
+                    name: '',
+                    message: "failed"
+                })
+            }
+        })
+})
+
+router.get('/getexercise', async (req, res) => {
+    const header = req.query.header;
+    const getData = req.query.getData;
+
+    const exercise = require('../config/model/exercise');
+    const user = require('../config/model/users');
+    console.log("get_ex_header: ", getData)
+    if (getData.year === '') {
+        return;
+    }
+    let userid = '';
+    await user.findOne({ email: header.email })
+        .then(async (result) => {
+            if (result) {
+                userid = result._id;
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    if (userid === '')
+        res.send({
+            message: "ExercisePlan is not exist"
+        })
+    else {
+        await exercise.find({ userid: userid, year: getData.year, month: getData.month, date: getData.date })
+            .then((result) => {
+                if (result.length !== 0) {
+                    res.send({
+                        message: "success",
+                        result: result[0]
+                    })
+                } else {
+                    res.send({
+                        message: "There is no plan"
+                    })
+                }
+            })
+    }
+
+});
+
+router.get('/getdiet', async (req, res) => {
+    const header = req.query.header;
+    const getData = req.query.getData;
+    console.log("get_diet_header: ", getData)
+    const diet = require('../config/model/diet');
+    const user = require('../config/model/users');
+    if (getData.year === '') {
+        return;
+    }
+    let userid = '';
+    await user.findOne({ email: header.email })
+        .then(async (result) => {
+            if (result) {
+                userid = result._id;
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    if (userid === '')
+        res.send({
+            message: "ExercisePlan is not exist"
+        })
+    else {
+        await diet.find({ userid: userid, year: getData.year, month: getData.month, date: getData.date })
+            .then((result) => {
+                if (result.length !== 0) {
+                    res.send({
+                        message: "success",
+                        result: result[0]
+                    })
+                } else {
+                    res.send({
+                        message: "There is no plan"
+                    })
+                }
+            })
+    }
+
+});
 module.exports = router

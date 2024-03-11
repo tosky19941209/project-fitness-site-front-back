@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toastr from "toastr";
 function SideBar({ mainContent, setMainContent }) {
     const logo_url = 'logo.png'
     const sideBar_Dash_Btn = [
@@ -10,6 +11,9 @@ function SideBar({ mainContent, setMainContent }) {
         'Support',
         'My Profile'
     ]
+
+
+
 
     const [accidentID, setAccidentID] = useState(0)
     const [accidentFootID, setAccidentFootID] = useState(-1)
@@ -30,11 +34,16 @@ function SideBar({ mainContent, setMainContent }) {
                             <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl flex  items-center hover:text-[#5534A5] duration-500`}
                                 onClick={
                                     (e) => {
-                                        setAccidentID(index)
-                                        const newData = { ...mainContent, sideBar: index }
-                                        setMainContent(newData)
+                                        const email = localStorage.getItem("email")
+                                        if (email) {
+                                            setAccidentID(index)
+                                            const newData = { ...mainContent, sideBar: index }
+                                            setMainContent(newData)
+                                        }else {
+                                            toastr.info("please Log in!")
+                                        }
                                     }}>
-                                <img className="mr-6 ml-14" width='40px' src={`${accidentID === index ? item+'_active.png' : item+'.png'}`} />
+                                <img className="mr-6 ml-14" width='40px' src={`${accidentID === index ? item + '_active.png' : item + '.png'}`} />
                                 <p className="text-[15px]">{item}</p>
                             </button>
                         </div>

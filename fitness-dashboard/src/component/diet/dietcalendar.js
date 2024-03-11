@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -31,7 +31,17 @@ function DietCalendar({ dietPlan, setDietPlan }) {
         month.push(futureDate.getMonth() + 1)
         date.push(futureDate.getDate())
     }
-
+    useEffect(() => {
+        const currentDate = new Date()
+        const newData = {
+            ...dietPlan,
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1,
+            date: currentDate.getDate(),
+            day: currentDate.getDay()
+        }
+        setDietPlan(newData)
+    }, [])
     return (
         <div className="flex flex-col justify-center items-center w-[100%] h-[20%]">
             <div className="flex w-[70%] h-[100%] justify-center items-center mt-1 ">

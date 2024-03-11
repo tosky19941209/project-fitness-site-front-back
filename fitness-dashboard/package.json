@@ -19,7 +19,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^10.0.4",
     "styled-components": "^6.1.8",
+    "toast": "^0.5.4",
+    "toastr": "^2.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

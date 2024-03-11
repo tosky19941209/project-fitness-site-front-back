@@ -2,6 +2,7 @@ import './App.css';
 import SideBar from './component/sidebar';
 import MainBox from './component/mainbox'
 import { useEffect, useState } from 'react';
+
 function App() {
   const [mainContent, setMainContent] = useState({
     sideBar: 0,

@@ -8,7 +8,7 @@ function Result_weekly(props) {
             <div className="flex justify-between items-center">
                 <p className="text-[black]">{props.time}</p>
                 <p className={`w-[30%] h-[60%] bg-[${props.color}] rounded-xl`}>{props.progress}</p>
-                {/* <p className={`w-[30%] h-[60%] bg-[#00E0FF] rounded-xl`}>{props.progress}</p> */}
+                {/* <p className={`w-[30%] h-[60%] bg-[#A85CF9] rounded-xl`}>{props.progress}</p> */}
             </div>
         </div>
     )

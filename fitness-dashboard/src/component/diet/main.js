@@ -1,11 +1,11 @@
 import React from "react";
 import DietGoal from './dietgoal.js'
 import DietPlan from './dietplan.js'
-function Main () {
+function Main ({email, password}) {
     return(
-        <div className="flex flex-col w-[95%] h-[85%] ml-5">
+        <div className="flex flex-col w-[95%] h-[100%] ml-5">
             <DietGoal/>
-            <DietPlan/>
+            <DietPlan email={email} password={password}/>
         </div>
     )
 }

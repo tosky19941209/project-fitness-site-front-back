@@ -30,6 +30,21 @@ function FitnessCalendar({ planData, setPlanData }) {
         year.push(futureDate.getFullYear())
     }
 
+    useEffect(() => {
+        const currentDate = new Date()
+        const newData = {
+            ...planData,
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1,
+            date: currentDate.getDate(),
+            day: currentDate.getDay()
+        }
+        setPlanData(newData)
+
+    },[])
+
+
+
     return (
         <div className="flex border rounded-xl w-full h-[20%] justify-center items-center bg-[#F1EEF6] mb-4">
             {
@@ -45,8 +60,7 @@ function FitnessCalendar({ planData, setPlanData }) {
                                 day: index
                             }
                             setPlanData(newData)
-                        }}
-                    >
+                        }}>
                         <div className="flex flex-col justify-center items-center">
                             <p className={`${index === accidentID ? 'text-[white]' : 'text-[black]'} text-[20px] mt-[50%]`}>{month[index] + "/" + date[index]}</p>
                             <p className={`${index === accidentID ? 'text-[white]' : 'text-[#757575]'} text-[15px] mt-[-20%]`}>{item}</p>

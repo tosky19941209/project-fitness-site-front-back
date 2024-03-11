@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Diet = new mongoose.Schema({
+const Exercise = new mongoose.Schema({
     userid: {
         type: mongoose.mongo.ObjectId,
         required: false
@@ -21,30 +21,20 @@ const Diet = new mongoose.Schema({
         type: String,
         required: false
     },
-    meal:{
-        breakfast:{
+    exerciseType:{
+        exerciseName:{
             type: [String],
             required: false
         },
-        snack1:{
+        exerciseTime:{
             type: [String],
             required: false
-        },
-        lunch:{
-            type: [String],
-            required: false
-        },
-        snack2:{
-            type: [String],
-            required: false
-        },
-        dinner:{
-            type: [String],
-            required: false
-        },
+        }
+
+       
     }
 })
 
-const dietmodel = mongoose.model("diet", Diet)
+const exercisemodel = mongoose.model("exerciseType", Exercise)
 
-module.exports = dietmodel
+module.exports = exercisemodel

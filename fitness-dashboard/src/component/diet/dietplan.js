@@ -9,7 +9,6 @@ function DietPlan({ email, password }) {
         month: '',
         date: '',
         day: '',
-        type: '',
         food: {
             breakfast: [],
             lunch: [],
@@ -18,7 +17,6 @@ function DietPlan({ email, password }) {
             snack2: []
         },
     })
-
 
     useEffect(() => {
         if(dietPlan.year === '') return

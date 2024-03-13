@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Result_weekly(props) {
     return (
@@ -8,52 +8,74 @@ function Result_weekly(props) {
             <div className="flex justify-between items-center">
                 <p className="text-[black]">{props.time}</p>
                 <p className={`w-[30%] h-[60%] bg-[${props.color}] rounded-xl`}>{props.progress}</p>
+                {/* <p className={`w-[30%] h-[60%] bg-[#00E0FF] rounded-xl`}>{props.progress}</p> */}
+                {/* <p className={`w-[30%] h-[60%] bg-[#929292] rounded-xl`}>{props.progress}</p> */}
                 {/* <p className={`w-[30%] h-[60%] bg-[#A85CF9] rounded-xl`}>{props.progress}</p> */}
             </div>
         </div>
     )
 }
 
-function Result() {
-    const result_category = 
-    [
-        'Completed',
-        'Umcompleted',
-        'Today Ongoing'
-    ]
-    const result_time = 
-    [
-        '30min',
-        '45min',
-        '10min'
-    ]
+function Result({ history }) {
+    const [resultCounter, setResultCounter] = useState();
+    const [resultAccuracy, setResultAccuracy] = useState()
+    const [resultDurtime, setResultDurtime] = useState()
 
-    const result_progress = 
-    [
-        '120%',
-        '80%',
-        '45%'
-    ]
+    const [progressCounter, setProgressCounter] = useState();
+    const [progressAccuracy, setProgressAccuracy] = useState()
+    const [progressDurtime, setProgressDurtime] = useState()
 
-    const result_color =[
-        '#00E0FF',
-        '#929292',
-        '#A85CF9',
-    ]
+
+
+    const targetCounter = 100
+    const targetAccuracy = 100
+    const targetDurtime = 3000
+
+    useEffect(() => {
+        if (history === null) return
+        let hcounter = 0
+        let haccuracy = 0
+        let hdurtime = 0
+
+        history.map((item, index) => {
+
+            hcounter = hcounter + Number(item.averageCounter)
+            haccuracy = haccuracy + Number(item.averageAccuracy)
+            hdurtime = hdurtime + Number(item.averageDurtime)
+        })
+        haccuracy = haccuracy / history.length
+        setResultAccuracy(Number(haccuracy.toFixed(3)))
+        setResultCounter(hcounter / history.length)
+        setResultDurtime(hdurtime)
+
+        
+    }, [history])
+
+    useEffect(() => {
+        const procounter = resultCounter/targetCounter * 100
+        const proaccuracy = resultAccuracy/targetAccuracy * 100
+        const produrtime = resultDurtime/targetDurtime * 100
+        setProgressAccuracy(Number(proaccuracy.toFixed(1)) + "%")
+        setProgressCounter(Number(procounter.toFixed(1)) + "%")
+        setProgressDurtime(Number(produrtime.toFixed(1)) + "%")
+
+    },[resultAccuracy, resultCounter, resultDurtime])
+
     return (
         <div className="flex flex-col justify-center items-center w-[50%] h-[80%]">
-            <select className="form-control" style={{
+            {/* <select className="form-control" style={{
                 width: "15vw"
             }}>
+                <option>Daily</option>
                 <option>Weekly</option>
-                <option>Monthly</option>
-            </select>
-            {
-                result_category.map((item, index) => (
+            </select> */}
 
-                    <Result_weekly category={item} time={result_time[index]} progress={result_progress[index]} color={result_color[index]} />
-                ))
-            }
+            <Result_weekly category="Total Counter" time={resultCounter + ""} progress={progressCounter} color="#00E0FF" />
+            <Result_weekly category="Total Time" time={resultDurtime + " s"} progress={progressDurtime} color="#929292" />
+            <Result_weekly category="Total Accuracy" time={resultAccuracy + " %"} progress={progressAccuracy} color="#A85CF9" />
+
+
+
 
         </div>
     )

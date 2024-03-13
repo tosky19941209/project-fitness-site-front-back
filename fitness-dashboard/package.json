@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/pose": "^0.5.1675469404",
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
     "@mui/x-charts": "^6.19.5",
@@ -20,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.4",
+    "react-webcam": "^7.2.0",
     "styled-components": "^6.1.8",
     "toast": "^0.5.4",
     "toastr": "^2.1.4",

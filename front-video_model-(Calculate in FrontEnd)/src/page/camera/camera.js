@@ -110,6 +110,10 @@ function Camera({ setStateResultData, stateResultData }) {
         if (stateResultData.btnStateStart === true && iswebcamEnable) {
             videoRef.current.play()
 
+            var timeTracker = setInterval( () => {
+                setTimeTrack(prev => prev +)
+            }, 1000)
+
             var myInterval = setInterval(() => {
                 if (iswebcamEnable) {
                     // const video = webcamRef.current.video
@@ -120,6 +124,7 @@ function Camera({ setStateResultData, stateResultData }) {
             }, 150);
             return () => {
                 clearInterval(myInterval);
+                clearInterval(timeTracker)
                 const canvasElement = canvasRef.current;
                 const canvasCtx = canvasElement.getContext("2d");
                 canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -224,7 +229,7 @@ function Camera({ setStateResultData, stateResultData }) {
                         writingMode: 'vertical-rl',
                         marginLeft: '5vw',
                         marginTop: '-4vw',
-                        accentColor: 'aqua',
+                        accentColor: 'red   ',
                         boxShadow: '0 0 30px 10px rgba(0, 142, 236, 0.815)'
                     }}
                 ></progress>

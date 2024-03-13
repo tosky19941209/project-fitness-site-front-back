@@ -7,6 +7,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
         'OverView',
         'Fitness Analytics',
         'Diet Analytics',
+        'Exercise Analytics'
     ]
 
     const signInBtn = useRef(null)
@@ -32,7 +33,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                 if (newData.message === 'success') {
                     const name = newData.name
                     setAvatarName(name)
-                } 
+                }
             })
             .catch((err) => {
                 console.log("err: ", err)
@@ -57,7 +58,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                     localStorage.setItem('fitnessemail', email)
                     localStorage.setItem('fitnesspassword', password)
                 } else {
-                    toastr.info("Email is not correct")
+                    toastr.info("Email or password is not correct")
                 }
             })
             .catch((err) => {
@@ -67,15 +68,15 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
 
     return (
         <div className="flex flex-col justify-center w-[100%] h-[15%]">
-            <div className=" flex justify-between" onClick={() => {
-                if (showWidget == false) setShowWidget(true)
-                else if (showWidget == true) setShowWidget(false)
-            }}>
+            <div className=" flex justify-between" >
                 <div></div>
                 <p className="text-[#5534A5] text-[200%] ml-[10%]">{content[sideBarIndex]}</p>
                 <div className="flex flex-col">
                     <div className="flex  items-center mr-10">
-                        <button><img className="border rounded-[50%]" src={avatarSrc} width="80px"></img></button>
+                        <button onClick={(e) => {
+                            showWidget === true ? setShowWidget(false) : setShowWidget(true)
+                        }}
+                        ><img className="border rounded-[50%]" src={avatarSrc} width="80px"></img></button>
                         <p className="text-[#757575] ml-10">{avatarName}</p>
                     </div>
 

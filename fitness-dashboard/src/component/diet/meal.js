@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../../service/axios'
-function Meal({ title, meal, index, email, password, dietPlan }) {
+function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
 
     const [mealContent, setMealContent] = useState([])
     const [accidentID, setAccidentID] = useState(-1)
@@ -24,6 +24,7 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
     useEffect(() => {
         if (dietPlan.year === '') return
         let updateMeal = null
+
         if (index === 0) {
             const newData = {
                 breakfast: mealContent,
@@ -33,6 +34,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
                 dinner: meal.dinner
             }
             updateMeal = newData
+
+            const newPlan = {
+                ...dietPlan,
+                food: {
+                    breakfast: mealContent,
+                    snack1: meal.snack1,
+                    lunch: meal.lunch,
+                    snack2: meal.snack2,
+                    dinner: meal.dinner
+                }
+
+            }
+            setDietPlan(newPlan)
         }
 
         if (index === 1) {
@@ -44,6 +58,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
                 dinner: meal.dinner
             }
             updateMeal = newData
+
+            const newPlan = {
+                ...dietPlan,
+                food: {
+                    breakfast: meal.breakfast,
+                    snack1: mealContent,
+                    lunch: meal.lunch,
+                    snack2: meal.snack2,
+                    dinner: meal.dinner
+                }
+
+            }
+            setDietPlan(newPlan)
         }
 
         if (index === 2) {
@@ -55,6 +82,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
                 dinner: meal.dinner
             }
             updateMeal = newData
+
+            const newPlan = {
+                ...dietPlan,
+                food: {
+                    breakfast: meal.breakfast,
+                    snack1: meal.snack1,
+                    lunch: mealContent,
+                    snack2: meal.snack2,
+                    dinner: meal.dinner
+                }
+
+            }
+            setDietPlan(newPlan)
         }
 
         if (index === 3) {
@@ -66,6 +106,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
                 dinner: meal.dinner
             }
             updateMeal = newData
+
+            const newPlan = {
+                ...dietPlan,
+                food: {
+                    breakfast: meal.breakfast,
+                    snack1: meal.snack1,
+                    lunch: meal.lunch,
+                    snack2: mealContent,
+                    dinner: meal.dinner
+                }
+
+            }
+            setDietPlan(newPlan)
         }
 
         if (index === 4) {
@@ -77,6 +130,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
                 dinner: mealContent
             }
             updateMeal = newData
+
+            const newPlan = {
+                ...dietPlan,
+                food: {
+                    breakfast: meal.breakfast,
+                    snack1: meal.snack1,
+                    lunch: meal.lunch,
+                    snack2: meal.snack2,
+                    dinner: mealContent
+                }
+
+            }
+            setDietPlan(newPlan)
         }
 
 
@@ -86,18 +152,19 @@ function Meal({ title, meal, index, email, password, dietPlan }) {
             email: localEmail,
             password: localPassword
         }
-        
+
         const updateData = {
             year: dietPlan.year,
             month: dietPlan.month,
             date: dietPlan.date,
             day: dietPlan.day,
-            meal: updateMeal
+            meal: updateMeal,
         }
 
         const apiData = { header: header, updateData: updateData }
         api.post('/setdiet', apiData)
             .then((res) => {
+                // console.log("update: ", updateData)
             })
 
     }, [updateSignal])

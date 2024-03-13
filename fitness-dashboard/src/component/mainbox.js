@@ -4,7 +4,8 @@ import Diet from './diet/diet.js'
 import { useStepContext } from "@mui/material";
 import OverView from "./overview/overview.js";
 import Header from './header.js'
-
+import Analytics from './analytics/analytics.js'
+import Support from "./support/support.js";
 function MainBox({ mainContent, setMainContent }) {
 
     const [headerContent, setHeaderContent] = useState({
@@ -24,7 +25,7 @@ function MainBox({ mainContent, setMainContent }) {
             }
             setMainContent(newData)
         }
-    }, [sideBarIndex])  
+    }, [sideBarIndex])
 
     return (
         <div className="flex flex-col w-[100%] h-[full]">
@@ -33,7 +34,8 @@ function MainBox({ mainContent, setMainContent }) {
             {sideBarIndex === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}
             {sideBarIndex === 1 ? <FitnessAnalytics email={headerContent.email} password={headerContent.password} /> : spaceTag}
             {sideBarIndex === 2 ? <Diet email={headerContent.email} password={headerContent.password} /> : spaceTag}
-
+            {sideBarIndex === 3 ? <Analytics /> : spaceTag}
+            {sideBarIndex === 4 ? <Support/>: spaceTag}
         </div>
     )
 }

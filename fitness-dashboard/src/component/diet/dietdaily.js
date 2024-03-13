@@ -14,7 +14,7 @@ function DietDaily({ dietPlan, setDietPlan, email, password }) {
         <div className="flex justify-between items-center border rounded-xl w-[98%] h-[90%] mt-3 ml-5">
             {
                 mealType.map((item, index) => (
-                    <Meal title={item} meal={dietPlan.food} index={index} email={email} password={password} dietPlan={dietPlan}/>
+                    <Meal title={item} meal={dietPlan.food} index={index} email={email} password={password} dietPlan={dietPlan} setDietPlan={setDietPlan}/>
                 ))
             }
         </div>

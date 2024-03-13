@@ -16,7 +16,8 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
     const [accidentID, setAccidentID] = useState(null)
     const [editPlanWidget, setEditPlanWidget] = useState(null)
     const [exerciseType, setExerciseType] = useState("")
-    const [exerciseTime, setExerciseTime] = useState("")
+    const [exerciseStartTime, setExerciseStartTime] = useState("")
+    const [exerciseEndTime, setExerciseEndTime] = useState("")
     const [showWidget, setShowWidget] = useState(false);
     const [updateSignal, setUpdateSignal] = useState(0)
 
@@ -26,7 +27,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
     }, [planData])
 
     useEffect(() => {
-        if(planData.year === '') return 
+        if (planData.year === '') return
 
         const localEmail = localStorage.getItem("fitnessemail")
         const localPassword = localStorage.getItem("fitnesspassword")
@@ -34,7 +35,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             email: localEmail,
             password: localPassword
         }
-        
+
         const updateData = {
             year: planData.year,
             month: planData.month,
@@ -76,15 +77,28 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                     >
                     </input>
                     <p className="text-[black] text-[15px] text-left mt-2">Time</p>
-                    <input className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
-                        style={{
-                            width: "98%"
-                        }}
-                        value={exerciseTime}
-                        onChange={(e) => {
-                            setExerciseTime(e.target.value)
-                        }}
-                    ></input>
+                    <div className="flex">
+                        <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
+                            style={{
+                                width: "98%",
+                                height:"130%"
+                            }}
+                            value={exerciseStartTime}
+                            onChange={(e) => {
+                                setExerciseStartTime(e.target.value)
+                            }}
+                        ></input>
+                        <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
+                            style={{
+                                width: "98%",
+                                height:"130%"
+                            }}
+                            value={exerciseEndTime}
+                            onChange={(e) => {
+                                setExerciseEndTime(e.target.value)
+                            }}
+                        ></input>
+                    </div>
 
                     <div className="flex justify-between">
                         <button className="text-[#5534A5] text-[18px] ml-10 mt-1"
@@ -92,14 +106,15 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                                 const newType = dailyPlanExercise
                                 newType.push(exerciseType)
                                 const newTime = dailyPlanTime
-                                newTime.push(exerciseTime)
+                                newTime.push(exerciseStartTime+"-"+exerciseEndTime)
 
                                 setDailyPlanExercise(newType)
                                 setDailyPlanTime(newTime)
                                 setShowWidget(false)
                                 const newData = { ...planData, exerciseType: newType, exerciseTime: newTime }
                                 setPlanData(newData)
-                                setExerciseTime('')
+                                setExerciseStartTime('')
+                                setExerciseEndTime('')
                                 setExerciseType('')
                                 setUpdateSignal(prev => prev + 1)
                             }}

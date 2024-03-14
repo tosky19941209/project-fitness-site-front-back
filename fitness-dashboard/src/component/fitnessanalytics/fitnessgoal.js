@@ -2,7 +2,7 @@ import React from "react";
 
 function FitnessGoal() {
     return (
-        <div className="flex border rounded-xl  w-[80%] h-[45%] items-center mt-2 mb-2">
+        <div className="flex border rounded-xl  w-[100%] h-[48%] items-center mb-[2%]">
             <div className="flex items-centerbg-[#F1EEF6] w-[10%] rounded-xl ml-[11%] ">
                 <img src='icon1.png'></img>
             </div>

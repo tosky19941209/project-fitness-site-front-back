@@ -6,11 +6,10 @@ function SideBar({ mainContent, setMainContent }) {
         'OverView',
         'Fitness Analytics',
         'Diet Analytics',
-        'Exercise Page'
+        'Exercise'
     ]
     const sideBar_Foot_Btn = [
         'Support',
-        'My Profile'
     ]
 
     useEffect(() => {
@@ -21,19 +20,13 @@ function SideBar({ mainContent, setMainContent }) {
     const [accidentID, setAccidentID] = useState(0)
 
     return (
-        <div className="flex flex-col bg-white-100 w-[20%] border">
-
-            <div className="flex justify-center items-center w-full h-1/6">
-                <img src={logo_url} width="60px" height="60px"></img>
-                <p className="text-black">Training Body</p>
-            </div>
-
-            <div className="flex flex-col w-full h-4/6 ">
+        <div className="flex flex-col justify-center items-center bg-white-100 w-[20%]  border ml-0">
+            <div className="flex flex-col justify-start items-center w-full h-4/6 ">
                 {
                     sideBar_Dash_Btn.map((item, index) => (
                         <div className="flex items-center w-[90%] h-[15%] mt-2 mb-2 ">
-                            <div className={`w-[10%] h-[50%] ${accidentID === index ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-5%]`} />
-                            <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl flex  items-center hover:text-[#5534A5] duration-500`}
+                            <div className={`w-[5%]  h-[50%] ${accidentID === index ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-5%]`} />
+                            <button className={`${accidentID === index ? 'text-[#5534A5]' : 'text-[#757575]'} flex justify-center items-center font-1xl hover:text-[#5534A5] duration-500`}
                                 onClick={
                                     (e) => {
                                         const email = localStorage.getItem("fitnessemail")
@@ -45,33 +38,33 @@ function SideBar({ mainContent, setMainContent }) {
                                             toastr.info("please Log in!")
                                         }
                                     }}>
-                                <img className="mr-6 ml-14" width='40px' src={`${accidentID === index ? item + '_active.png' : item + '.png'}`} />
-                                <p className="text-[15px]">{item}</p>
+                                <img className="mr-6 ml-8" width='40px' src={`${accidentID === index ? item + '_active.png' : item + '.png'}`} />
+                                <p className="mt-[6%] text-[0px] lg:text-[60%] md:text-[0px] sm:text-[0px]">{item}</p>
                             </button>
                         </div>
                     ))
                 }
             </div>
 
-            <div className="flex flex-col w-full h-1/6">
+            <div className="flex flex-col justify-center items-center w-full h-1/6">
                 {
                     sideBar_Foot_Btn.map((item, index) => (
-                        <div className="flex items-center w-[90%] h-[35%] mt-2 mb-2">
-                            <div className={`w-[10%] h-[100%] ${accidentID === index + 4 ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-5%]`} />
-                            <button className={`${accidentID === index + 4 ? 'text-[#5534A5]' : 'text-[#757575]'} font-1xl flex  items-center hover:text-[#5534A5] duration-500`}
+                        <div className="flex items-center w-[90%] h-[45%] mt-2 mb-2">
+                            <div className={`w-[5%]  h-[80%] ${accidentID === index + 4 ? 'bg-[#5534A5]' : ''} rounded-xl ml-[-5%]`} />
+                            <button className={`${accidentID === index + 4 ? 'text-[#5534A5]' : 'text-[#757575]'} flex justify-center items-center font-1xl hover:text-[#5534A5] duration-500`}
                                 onClick={
                                     (e) => {
                                         const email = localStorage.getItem("fitnessemail")
                                         if (email) {
                                             setAccidentID(index + 4)
-                                            const newData = { ...mainContent, sideBar: index + 4}
+                                            const newData = { ...mainContent, sideBar: index + 4 }
                                             setMainContent(newData)
                                         } else {
                                             toastr.info("please Log in!")
                                         }
-                                    }}
-                            ><img className="mr-6 ml-14" width='30px' src={`${item}.png`} />
-                                <p className="text-[15px]">{item}</p>
+                                    }}>
+                                <img className="mr-6 ml-8" width='40px' src={`${accidentID === index + 4 ? item + '_active.png' : item + '.png'}`} />
+                                <p className="text-[0px] lg:text-[60%] md:text-[0px] sm:text-[0px] mt-[6%]">{item}</p>
                             </button>
                         </div>
                     ))

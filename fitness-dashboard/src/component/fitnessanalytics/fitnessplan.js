@@ -53,8 +53,8 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
     }, [updateSignal])
 
     return (
-        <div className="flex flex-col border rounded-xl w-full h-[93%] items-center">
-            <button className='border rounded-[50%] w-[8%] mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
+        <div className="flex flex-col items-center border rounded-xl w-full h-[75%] items-center overflow-y-auto">
+            <button className='border rounded-[50%] w-[7%] min-[1000px]:w-[7%]  mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
                 onClick={
                     (e) => {
                         showWidget === false ? setShowWidget(true) : setShowWidget(false)
@@ -64,7 +64,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             </button>
 
             {showWidget &&
-                <div className="flex flex-col mt-1 w-[95%] h-[33%] bg-[#F1EEF6] border rounded-xl">
+                <div className="mt-1 w-[95%] h-[30%] min-[1000px]:h-[33%] bg-[#F1EEF6] border rounded-xl">
                     <p className="text-[black] text-[15px] text-left mt-3">Exercise Kind</p>
                     <input className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
                         style={{
@@ -81,7 +81,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                         <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
                             style={{
                                 width: "98%",
-                                height:"130%"
+                                height: "130%"
                             }}
                             value={exerciseStartTime}
                             onChange={(e) => {
@@ -91,7 +91,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                         <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
                             style={{
                                 width: "98%",
-                                height:"130%"
+                                height: "130%"
                             }}
                             value={exerciseEndTime}
                             onChange={(e) => {
@@ -100,13 +100,13 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                         ></input>
                     </div>
 
-                    <div className="flex justify-between">
-                        <button className="text-[#5534A5] text-[18px] ml-10 mt-1"
+                    <div className="flex justify-between mt-1">
+                        <button className="text-[#5534A5] text-[18px] ml-20 mt-1"
                             onClick={(e) => {
                                 const newType = dailyPlanExercise
                                 newType.push(exerciseType)
                                 const newTime = dailyPlanTime
-                                newTime.push(exerciseStartTime+"-"+exerciseEndTime)
+                                newTime.push(exerciseStartTime + "-" + exerciseEndTime)
 
                                 setDailyPlanExercise(newType)
                                 setDailyPlanTime(newTime)
@@ -121,7 +121,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                         >
                             Add
                         </button>
-                        <button className="text-[black] text-[18px] mr-10 mt-1"
+                        <button className="text-[black] text-[18px] mr-20 mt-1"
                             onClick={(e) => {
                                 setShowWidget(false)
                             }}>
@@ -134,7 +134,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             {
 
                 dailyPlanExercise.map((item, index) => (
-                    <div className="flex border w-[94%] h-[15%] rounded-xl mt-2 justify-between">
+                    <div className="flex border w-[94%] h-[15%] rounded-xl mt-2 justify-between z-[0]">
                         <div className="w-[12px] bg-[#5534A5] rounded-xl" />
                         <div className="flex w-[94%] rounded-xl">
                             <div className="flex flex-col justify-between">
@@ -142,7 +142,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                                 <p className="text-[#757575] text-left ml-5 text-[15px]">{dailyPlanTime[index]}</p>
                             </div>
                         </div>
-                        <div className="flex  mt-3 h-[10%]">
+                        <div className="flex mt-2 h-[80%]">
                             <button onClick={(e) => {
                                 const newDataType = []
                                 const newDataTime = []
@@ -162,7 +162,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                                     src={index === accidentID ? 'close_hover.png' : 'close.png'}
                                     onMouseEnter={() => { setAccidentID(index) }}
                                     onMouseLeave={() => { setAccidentID(null) }}
-                                    width='50px' height='10px'
+                                    width='35px'
                                 />
                             </button>
                         </div>

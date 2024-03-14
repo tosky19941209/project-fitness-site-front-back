@@ -24,7 +24,7 @@ function Result({ setStateResultData, stateResultData, exerciseResult, setExerci
 
     const setSaveExercise = (e) => {
         if (exerciseResult.durtime === '') return
-        if (exerciseResult.index === '' ) return
+        if (exerciseResult.index === '') return
         const header = {
             email: localStorage.getItem('fitnessemail'),
             password: localStorage.getItem('fitnesspassword')

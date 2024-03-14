@@ -18,9 +18,8 @@ function FitnessAnalytics({ email, password }) {
         exerciseTime: []
     })
 
-
     useEffect(() => {
-        if(planData.year === '') return
+        if (planData.year === '') return
         const localEmail = localStorage.getItem("fitnessemail")
         const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
@@ -64,24 +63,46 @@ function FitnessAnalytics({ email, password }) {
 
 
     return (
-        <div className="flex bg-white-300 w-[100%] h-[80%] mt-8">
+        <div className="flex flex-col justify-center w-[100%] h-[250%] 
+                        min-[1000px]:flex-row  min-[1000px]:h-[85%]">
 
-            <div className="w-3/12 h-5/6 ml-10 mt-3">
+            <div className="w-[90%] h-[40%] ml-5
+                            min-[1000px]:w-[40%] min-[1000px]:h-[100%] ">
                 <FitnessCalendar planData={planData} setPlanData={setPlanData} />
                 <FitnessPlan planData={planData} setPlanData={setPlanData} email={email} password={password} />
             </div>
 
-            <div className="w-[70%] h-full flex flex-col">
+            <div className="w-[90%] h-[155%] 
+                            mt-5 ml-2
+                            sm:mt-5 sm:ml-2
+                            min-[1500px]:h-[100%] min-[1500px]:mt-[0px]
+                            min-[1000px]:h-[100%] min-[1000px]:mt-[0px]
+                            ">
 
-                <div className="flex w-[100%] h-[30%] justify-center items-center ">
-                    <div className="flex flex-col justify-center items-center w-[50%] h-[90%]">
+                <div className="flex flex-col w-[103%] h-[15%]
+                                 min-[1500px]:w-[100%] min-[1500px]:flex-row min-[1500px]:h-[30%]
+                                 min-[1000px]:w-[100%] min-[1000px]:flex-col min-[1000px]:h-[60%]
+                                 ">
+                    <div className="flex flex-col items-center w-[96%] h-[100%] ml-[2%] mr-[2%] 
+                                    min-[1500px]:w-[46%] min-[1500px]:mr-[2%]">
                         <FitnessGoal />
                         <TotalTime />
                     </div>
-                    <TotalProgress />
+
+                    <div className="flex flex-col justify-center items-center w-[96%] h-[90%] ml-[2%] mt-[2%] 
+                                    min-[1500px]:w-[46%] min-[1500px]:h-[100%] min-[1500px]:ml-[2%]  min-[1500px]:mt-[2px] 
+                                    min-[1000px]:w-[96%] min-[1000px]:h-[90%]   
+                                    border rounded-xl">
+                        <TotalProgress />
+                    </div>
                 </div>
 
-                <div className="flex border rounded-xl w-[95%] h-[70%] mt-[1%] ml-[5%] ">
+                <div
+                    className="border rounded-xl w-[98%] h-[50%] mt-[31%] ml-[2%] 
+                                min-[900px]:mt-[20%]
+                                min-[1000px]:h-[95%] min-[1000px]:mt-[2%] min-[1000px]:w-[96%]
+                                min-[1500px]:h-[65%] min-[1500px]:mt-[1%] min-[1500px]:w-[96%] 
+                                ">
                     <Chart />
                 </div>
             </div>

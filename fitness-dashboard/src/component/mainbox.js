@@ -28,7 +28,7 @@ function MainBox({ mainContent, setMainContent }) {
     }, [sideBarIndex])
 
     return (
-        <div className="flex flex-col w-[100%] h-[full]">
+        <div className="w-[80%] h-[full]">
             <Header sideBarIndex={sideBarIndex} headerContent={headerContent} setHeaderContent={setHeaderContent} setSideBarIndex={setSideBarIndex} />
 
             {sideBarIndex === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}

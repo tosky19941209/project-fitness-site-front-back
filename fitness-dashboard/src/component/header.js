@@ -7,7 +7,8 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
         'OverView',
         'Fitness Analytics',
         'Diet Analytics',
-        'Exercise Analytics'
+        'Exercise Analytics',
+        'Support'
     ]
 
     const signInBtn = useRef(null)
@@ -33,6 +34,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                 if (newData.message === 'success') {
                     const name = newData.name
                     setAvatarName(name)
+                    toastr.success("Welcome to fitness")
                 }
             })
             .catch((err) => {
@@ -70,7 +72,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
         <div className="flex flex-col justify-center w-[100%] h-[15%]">
             <div className=" flex justify-between" >
                 <div></div>
-                <p className="text-[#5534A5] text-[200%] ml-[10%]">{content[sideBarIndex]}</p>
+                <p className={`text-[#5534A5] text-[200%] ml-[10%]`}>{content[sideBarIndex]}</p>
                 <div className="flex flex-col">
                     <div className="flex  items-center mr-10">
                         <button onClick={(e) => {

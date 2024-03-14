@@ -169,13 +169,17 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
 
     }, [updateSignal])
     return (
-        <div className="flex flex-col justify-center items-center w-[20%] h-[90%] mr-5 ml-5 border rounded-xl">
+        <div className="flex flex-col justify-center items-center w-[20%] h-[90%] mr-5 ml-5 border rounded-xl mt-[1%]">
             <p className="text-[#5534A5]">{title}</p>
-            <button className="w-[10%] mt-[-7%] ml-[75%] hover:bg-[#A85CF9] rounded-[50%]"
+            <button className="mt-[-7%] ml-[75%] hover:bg-[#A85CF9] rounded-[50%]
+                                min-[1500px]:w-[10%]
+                                min-[1000px]:w-[15%]
+                                min-[720px]:w-[15%]
+                                "
                 onClick={(e) => {
                     showWidget === false ? setShowWidget(true) : setShowWidget(false)
                 }}>
-                <img src='plus.png'></img>
+                    <img src='plus.png' className="w-[100%]"></img>
             </button>
             {
                 showWidget &&
@@ -212,7 +216,7 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
 
                 {
                     mealContent.map((item, index) => (
-                        <div className="flex justify-between items-center w-[100%] h-[17%] mt-1 mb-1 border rounded-xl shadow-lg">
+                        <div className="flex justify-between items-center w-[100%] h-[17%] mt-1 mb-1 border rounded-xl shadow-sm">
                             <p className="text-[black] text-[18px] ml-5 mt-3">{item}</p>
                             <button className="w-[14%]"
                                 onClick={(e) => {
@@ -227,7 +231,7 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
                                     setMealContent(newData)
                                     setUpdateSignal(prev => prev + 1)
                                 }}>
-                                <img src={index === accidentID ? 'close_hover.png' : 'close.png'}
+                                <img src={index === accidentID ? 'close_hover.png' : 'close.png'} 
                                     onMouseEnter={() => { setAccidentID(index) }}
                                     onMouseLeave={() => { setAccidentID(null) }}></img>
                             </button>

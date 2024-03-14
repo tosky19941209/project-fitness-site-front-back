@@ -3,7 +3,7 @@ import FitnessGoal from "./fitnessgoal";
 function TotalTime() {
 
     return (
-        <div className="flex  border rounded-xl  w-[80%] h-[45%] justify-center items-center mt-2 mb-2">
+        <div className="flex  border rounded-xl  w-[100%] h-[48%] justify-center items-center mt-2">
             
             <div className="flex justify-center w-[45%] h-[80%]">
                 <div className="flex flex-col justify-center items-center w-[40%] h-[100%] rounded-xl">

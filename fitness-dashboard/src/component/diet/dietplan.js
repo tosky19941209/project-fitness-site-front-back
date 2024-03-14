@@ -72,9 +72,9 @@ function DietPlan({ email, password }) {
     }, [dietPlan.day])
 
     return (
-        <div className="flex flex-col border rounded-xl  w-[100%] h-[100%]">
+        <div className="border rounded-xl  w-[100%] h-[100%]">
             <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />
-            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />
+            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />   
         </div>
     )
 

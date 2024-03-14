@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React, { useState, useEffect } from "react";
 
 function Result_weekly(props) {
@@ -7,7 +8,7 @@ function Result_weekly(props) {
             <p className="text-[80%] text-left text-[#757575]">{props.category} </p>
             <div className="flex justify-between items-center">
                 <p className="text-[black]">{props.time}</p>
-                <p className={`w-[30%] h-[60%] bg-[${props.color}] rounded-xl`}>{props.progress}</p>
+                <p className={`w-[30%] h-[60%] bg-[${props.color}] rounded-xl min-[1500px]:w-[50%]`}>{props.progress}</p>
                 {/* <p className={`w-[30%] h-[60%] bg-[#00E0FF] rounded-xl`}>{props.progress}</p> */}
                 {/* <p className={`w-[30%] h-[60%] bg-[#929292] rounded-xl`}>{props.progress}</p> */}
                 {/* <p className={`w-[30%] h-[60%] bg-[#A85CF9] rounded-xl`}>{props.progress}</p> */}
@@ -17,9 +18,9 @@ function Result_weekly(props) {
 }
 
 function Result({ history }) {
-    const [resultCounter, setResultCounter] = useState();
-    const [resultAccuracy, setResultAccuracy] = useState()
-    const [resultDurtime, setResultDurtime] = useState()
+    const [resultCounter, setResultCounter] = useState(0);
+    const [resultAccuracy, setResultAccuracy] = useState(0)
+    const [resultDurtime, setResultDurtime] = useState(0)
 
     const [progressCounter, setProgressCounter] = useState();
     const [progressAccuracy, setProgressAccuracy] = useState()
@@ -43,26 +44,38 @@ function Result({ history }) {
             haccuracy = haccuracy + Number(item.averageAccuracy)
             hdurtime = hdurtime + Number(item.averageDurtime)
         })
+
         haccuracy = haccuracy / history.length
+        isNaN(haccuracy) ? haccuracy = 0 : haccuracy = haccuracy
+        isNaN(hcounter) ? hcounter = 0 : hcounter = hcounter
+        isNaN(hdurtime) ? hdurtime = 0 : hdurtime = hdurtime
+
         setResultAccuracy(Number(haccuracy.toFixed(3)))
         setResultCounter(hcounter / history.length)
         setResultDurtime(hdurtime)
-
-        
     }, [history])
 
     useEffect(() => {
-        const procounter = resultCounter/targetCounter * 100
-        const proaccuracy = resultAccuracy/targetAccuracy * 100
-        const produrtime = resultDurtime/targetDurtime * 100
+        if (isNaN(resultCounter))
+            setResultCounter(0)
+    }, [resultCounter])
+
+    useEffect(() => {
+        let procounter = resultCounter / targetCounter * 100
+        let proaccuracy = resultAccuracy / targetAccuracy * 100
+        let produrtime = resultDurtime / targetDurtime * 100
+        isNaN(procounter) ? procounter = 0 : procounter = procounter
+        isNaN(proaccuracy) ? proaccuracy = 0 : proaccuracy = proaccuracy
+        isNaN(produrtime) ? produrtime = 0 : produrtime = produrtime
+
         setProgressAccuracy(Number(proaccuracy.toFixed(1)) + "%")
         setProgressCounter(Number(procounter.toFixed(1)) + "%")
         setProgressDurtime(Number(produrtime.toFixed(1)) + "%")
 
-    },[resultAccuracy, resultCounter, resultDurtime])
+    }, [resultAccuracy, resultCounter, resultDurtime])
 
     return (
-        <div className="flex flex-col justify-center items-center w-[50%] h-[80%]">
+        <div className="flex flex-col justify-center items-center w-[80%] h-[80%]">
             {/* <select className="form-control" style={{
                 width: "15vw"
             }}>

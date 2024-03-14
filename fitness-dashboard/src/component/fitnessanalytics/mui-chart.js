@@ -77,15 +77,13 @@ export default function SimpleLineChart({ history }) {
   ];
 
   return (
-    <LineChart
-      width={700}
-      height={450}
-      series={[
-        { data: resultAccuracy, label: 'Accuracy' },
-        { data: resultCounter, label: 'Counter' },
-        { data: resultDurtime, label: 'Duration' },
-      ]}
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
-    />
-  );
+      <LineChart className='w-[80%]'
+        series={[
+          { data: resultAccuracy, label: 'Accuracy' },
+          { data: resultCounter, label: 'Counter' },
+          { data: resultDurtime, label: 'Duration' },
+        ]}
+        xAxis={[{ scaleType: 'point', data: xLabels }]}
+      />
+    );
 }

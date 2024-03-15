@@ -15,7 +15,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
 
     const [showWidget, setShowWidget] = useState(false)
     const [avatarSrc, setAvatarSrc] = useState('user.png')
-    const [avatarName, setAvatarName] = useState('')
+    const [avatarName, setAvatarName] = useState('Log in')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -24,7 +24,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
             signInBtn.current.click()
         }
     }
-
+    let loginstate = false
     useEffect(() => {
         const localEmail = localStorage.getItem("fitnessemail")
         const localPassword = localStorage.getItem("fitnesspassword")
@@ -34,7 +34,9 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                 if (newData.message === 'success') {
                     const name = newData.name
                     setAvatarName(name)
-                    toastr.success("Welcome to fitness")
+                    if (!loginstate)
+                        toastr.success("Welcome to fitness")
+                    loginstate = true
                 }
             })
             .catch((err) => {
@@ -56,6 +58,8 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                     }
                     setShowWidget(false)
                     setHeaderContent(newHeader)
+                    setEmail(email)
+                    setPassword(password)
                     toastr.success("Welcome to fitness")
                     localStorage.setItem('fitnessemail', email)
                     localStorage.setItem('fitnesspassword', password)
@@ -70,7 +74,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
 
     return (
         <div className="flex flex-col justify-center w-[100%] h-[15%]">
-            
+
             <div className=" flex justify-between" >
                 <div></div>
                 <p className={`text-[#5534A5] text-[20px] md:text-[50px] ml-[30%] md:ml-[10%]`}>{content[sideBarIndex]}</p>
@@ -80,7 +84,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
                             showWidget === true ? setShowWidget(false) : setShowWidget(true)
                         }}
                         ><img className="border rounded-[50%] hidden md:block " src={avatarSrc} width="80px"></img></button>
-                        <p className="text-[#757575] ml-10">{avatarName}</p>
+                        <p className="text-[#757575] ml-10" onClick={(e) => setShowWidget(!showWidget)}>{avatarName}</p>
                     </div>
 
                 </div>
@@ -89,7 +93,7 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
             <div className="flex justify-end absolute z-10 w-[90%] h-[1%] mt-[15%]">
                 {
                     showWidget &&
-                    <div className="flex flex-col justify-center items-center w-[30%] h-[250px] mr-[10%] mt-[-100px] border rounded-xl bg-[#F1EEF6] shadow-xl">
+                    <div className="flex flex-col justify-center items-center w-[90%] mt-[0%] md:w-[40%] xl:w-[30%] h-[250px] mr-[1%] md:mr-[5%] xl:mr-[20%] mt-[-100px] border rounded-xl bg-[#F1EEF6] shadow-xl">
                         <div className="flex flex-col w-[90%] h-[80%] justify-center">
 
                             <p className="text-[black] text-left text-[20px]">Email</p>
@@ -106,16 +110,16 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
 
                             <div className="flex justify-between mt-3">
 
-                                <button ref={signInBtn} className="text-[#5534A5] text-[20px] ml-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
+                                <button ref={signInBtn} className="text-[#5534A5] text-[15px] ml-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
                                     onClick={SignIn}>
                                     Sign in
                                 </button>
 
-                                <button className="text-[#5534A5] text-[20px] mr-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
+                                <button className="text-[#5534A5] text-[15px] mr-10 hover:bg-[#5534A5] hover:text-[white] duration-500 border rounded-[40px] w-[30%] h-[40px]"
                                     onClick={(e) => {
                                         setShowWidget(false)
                                         localStorage.clear()
-                                        setAvatarName('')
+                                        setAvatarName('Log in')
                                         setSideBarIndex(0)
                                     }}>
                                     Sign Out

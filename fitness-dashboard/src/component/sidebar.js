@@ -35,13 +35,13 @@ function SideBar({ mainContent, setMainContent }) {
 
     return (
         <div className='flex flex-col justify-center w-[0%] xl:w-[30%] xl:w-[25%] h-[100%] z-1'>
-            <button className="text-[black] border absolute top-[50px] left-[10px] block xl:hidden"
+            <button className="absolute top-[30px] left-[0px] block xl:hidden"
                 onClick={(e) => {
                     setSideBar(!showSideBarState)
                     // const newData = { ...mainContent, showSideBar: showSideBarState }
                     // setMainContent(newData)
                 }}>
-                Click me
+                <img src= 'dropdown.png' width='30px'></img>
             </button>
             <div className={`absolute w-[20%] md:w-[35%] xl:w-[20%] bg-[#F1EEF6] xl:bg-[white] flex flex-col ${!showSideBarState ? 'hidden' : ''} justify-start items-center h-[90%] xl:block mt-[100px] border`}>
                 {

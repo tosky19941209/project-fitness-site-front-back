@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toastr from "toastr";
 import api from "../../service/axios";
 function Support() {
     const [hoverState, setHoverState] = useState(false)
@@ -23,7 +24,8 @@ function Support() {
         api.post('/setfeedback', { header: header, updateData: updateData })
             .then((res) => {
                 if (res.data.message === 'success') {
-
+                    setFeedBackContent('')
+                    toastr.success("You sent feedback")
                 }
             })
     }

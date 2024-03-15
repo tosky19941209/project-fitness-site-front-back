@@ -38,15 +38,15 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
 
     const onResults = (results) => {
         const canvasElement = canvasRef.current;
-        // const webcamElement = webcamRef.current.video;
+        const webcamElement = webcamRef.current.video;
         const videoElement = videoRef.current;
 
         const canvasCtx = canvasElement.getContext("2d");
 
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-        canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-        // canvasCtx.drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
+        // canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+        canvasCtx.drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
 
         if (results.poseLandmarks) {
             drawConnectors(canvasCtx,
@@ -69,16 +69,16 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
 
         const landmark = results.poseLandmarks
         if (landmark) {
-            let state_pose = false
+            let state_pose = true
 
             for (let i = 0; i < 33; i++) {
-                if (landmark[i].x < 1 &&
-                    landmark[i].x > 0 &&
-                    landmark[i].y < 1 &&
-                    landmark[i].y > 0)
-                    state_pose = true
+                if (landmark[i].x > 1 ||
+                    landmark[i].x < 0 ||
+                    landmark[i].y > 1 ||
+                    landmark[i].y < 0)
+                    state_pose = false
             }
-
+            console.log(landmark)
             if (state_pose === true) {
                 const new_calc_data = {
                     pose_data: results,
@@ -86,9 +86,11 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     state_change_exercise: state_change_exercise
                 }
                 // const result = Analysis_exercise(new_calc_data)
+                console.log("OK")
                 setCalcResult(Analysis_exercise(new_calc_data));
             }
             else {
+                console.log("no")
                 setTipSpeaker("Your entire body must be in camera")
             }
         }
@@ -108,16 +110,16 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
     });
 
     useEffect(() => {
-
-        if (stateResultData.btnStateStart === true && iswebcamEnable) {
+        if (!iswebcamEnable) return
+        if (stateResultData.btnStateStart === true) {
             videoRef.current.play()
             var myTime = setInterval(() => {
                 setTimeTrack(prev => prev + 1)
             }, 1000)
             var myInterval = setInterval(() => {
                 if (iswebcamEnable) {
-                    // const video = webcamRef.current.video
-                    const video = videoRef.current;
+                    const video = webcamRef.current.video
+                    // const video = videoRef.current;
                     if (video)
                         poseRef.current.send({ image: video });
                 }
@@ -150,7 +152,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
             }
             setExerciseResult(newData)
         }
-    }, [stateResultData.btnStateStart])
+    }, [stateResultData.btnStateStart, iswebcamEnable])
 
     useEffect(() => {
         const category = stateResultData.kind_exercise.category
@@ -200,6 +202,26 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
     }, [counter])
 
 
+
+
+    useEffect(() => {
+        if (!iswebcamEnable || stateResultData.btnStateStart) {
+            const canvasElement = canvasRef.current;
+            const canvasCtx = canvasElement.getContext('2d');
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            return
+        }
+        const interval = setInterval(() => {
+            const canvasElement = canvasRef.current;
+            const webcamElement = webcamRef.current.video;
+            const canvasCtx = canvasElement.getContext('2d');
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
+
+        }, 50);
+        return () => clearInterval(interval);
+    }, [iswebcamEnable, stateResultData.btnStateStart]);
+
     return (
         <div className='flex justify-center w-[100vw] h-[70vw] xl:w-[48vw] xl:h-[40vw] border rounded-xl mb-[0.5vw] ml-[1vw]'>
             <video id='unrealvideo'
@@ -218,7 +240,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
             <div className='relative w-[90vw] h-[25vw] mt-[2vw] '>
                 <p className='text-[red]'> {tipSpeaker}</p>
                 <div className='relative mt-[1%] w-[100%] h-[100%] bg-black'>
-                    <div className='w-[100%] h-[100%] bg-[red]'>
+                    <div className='w-[10%] h-[100%] bg-[red]'>
                         {iswebcamEnable && (
                             <Webcam className=''
                                 audio={false}
@@ -247,22 +269,22 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     <button className='flex justify-center items-center ml-[45%] w-[8vw] h-[8vw] mt-[-6%] xl:w-[4vw] xl:h-[4vw] xl:mt-[5%] border rounded-[50%] shadow-xl
                         hover:shadow-[0_0_30px_5px_rgba(0,142,236,0.815)] duration-200'
                         onClick={async () => {
-                            // try {
-                            //     await navigator.mediaDevices.getUserMedia({ video: true })
-                            //     if (cambtn_classname === 'btn_camera') {
-                            //         setCamBtnClassName('btn_camera_active')
-                            //         setCamBtnSVGClassName('svg_css_active')
-                            //         setWebCamEnable(true)
-                            //     }
-                            //     else {
-                            //         setCamBtnClassName('btn_camera')
-                            //         setCamBtnSVGClassName('svg_css')
-                            //         setWebCamEnable(false)
-                            //     }
-                            // }
-                            // catch (err) {
-                            //     alert("Camera is not connected")
-                            // }
+                            try {
+                                await navigator.mediaDevices.getUserMedia({ video: true })
+                                if (cambtn_classname === 'btn_camera') {
+                                    setCamBtnClassName('btn_camera_active')
+                                    setCamBtnSVGClassName('svg_css_active')
+                                    setWebCamEnable(true)
+                                }
+                                else {
+                                    setCamBtnClassName('btn_camera')
+                                    setCamBtnSVGClassName('svg_css')
+                                    setWebCamEnable(false)
+                                }
+                            }
+                            catch (err) {
+                                alert("Camera is not connected")
+                            }
 
                             iswebcamEnable === true ? setWebCamEnable(false) : setWebCamEnable(true)
                             // if (cambtn_classname === 'btn_camera') {

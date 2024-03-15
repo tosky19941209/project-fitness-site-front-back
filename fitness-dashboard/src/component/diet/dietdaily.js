@@ -11,16 +11,10 @@ function DietDaily({ dietPlan, setDietPlan, email, password }) {
     ]
 
     return (
-        <div className="border rounded-xl w-[96%] h-[80%] ml-[2%] bg-orange-100
-                        min-[300px]:mt-[1%]
-                        min-[720px]:mt-[1%]
-                        min-[1000px]:mt-[1%] min-[1000px]:flex
-                        min-[1500px]:mt-[1%] min-[1500px]:flex
-
-            ">
+        <div className="flex flex-col xl:flex-row xl:flex-row border rounded-xl w-[96%] h-[86%] md:h-[80%] ml-[2%] mt-3">
             {
                 mealType.map((item, index) => (
-                    <Meal title={item} meal={dietPlan.food} index={index} email={email} password={password} dietPlan={dietPlan} setDietPlan={setDietPlan}/>
+                    <Meal title={item} meal={dietPlan.food} index={index} email={email} password={password} dietPlan={dietPlan} setDietPlan={setDietPlan} />
                 ))
             }
         </div>

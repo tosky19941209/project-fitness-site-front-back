@@ -103,16 +103,58 @@ function Result({ setStateResultData, stateResultData, exerciseResult, setExerci
     }, [])
 
     return (
-        <div className="flex flex-col items-center w-[30vw] h-[40vw] border rounded-xl ml-[2vw]">
+        <div className="flex flex-col items-center xl:justify-center
+                        w-[90vw] h-[160vw] ml-[1vw] mt-[60vw]
+                        md:w-[90vw] md:h-[150vw] md:mt-[50vw]
+                        xl:w-[30vw] xl:h-[40vw] xl:mt-[-1%] xl:ml-[10px]
+                        border rounded-xl">
 
-            <video id='samplevideo' className="mt-[5vw]" key={videokey} autoPlay={true} controls width='80%' height='80%' onEnded={() => {
-                const video = document.getElementById('samplevideo')
-                video.currentTime = 0;
-                video.play()
-            }}>
-                <source src={sampleVideoURL} type="video/mp4"></source>
-            </video>
+            <div className="flex xl:flex-col justify-center items-center w-[80%] xl:h-[56%]">
+                
+                <video id='samplevideo' className="w-[50%] xl:w-[100%] xl:ml-[0px] " key={videokey} autoPlay={true} controls width='80%' height='80%' onEnded={() => {
+                    const video = document.getElementById('samplevideo')
+                    video.currentTime = 0;
+                    video.play()
+                }}>
+                    <source src={sampleVideoURL} type="video/mp4"></source>
+                </video>
+                <div className="flex flex-col xl:flex-row justify-center items-center 
+                                w-[80%] h-[100%]
+                                xl:w-[100%]">
+                    <button className="w-[90%] h-[30%] mt-2 mb-2 border-solid border-1 border-[#A85CF9] rounded-xl text-[black] hover:bg-[#5534A5] hover:text-[white] duration-300"
+                        onClick={setSaveExercise}>
+                        save
+                    </button>
 
+
+                    <button className="w-[90%] h-[30%] mt-2 mb-2 border-solid border-1 border-[#A85CF9] rounded-xl text-[black] hover:bg-[#5534A5] hover:text-[white] duration-300" onClick={(e) => {
+                        if (isSelectDisabled === true)
+                            setIsSelectDisabled(false)
+                        else
+                            setIsSelectDisabled(true)
+
+                        if (iswebcamEnable === true) {
+                            if (stateResultData.btnStateStart === false) {
+                                setBtnName("Stop")
+                                const new_data = { ...stateResultData, btnStateStart: true }
+                                setStateResultData(new_data)
+                            }
+
+                            else {
+                                const new_data = { ...stateResultData, btnStateStart: false }
+                                setStateResultData(new_data)
+                                setBtnName("Start")
+                            }
+                        }
+
+                        else {
+                            alert("Please Turn on Camera")
+                        }
+                    }}>
+                        {btn_name}
+                    </button>
+                </div>
+            </div>
 
 
 
@@ -161,47 +203,6 @@ function Result({ setStateResultData, stateResultData, exerciseResult, setExerci
                     )))
                 }
             </select>
-
-
-
-            <div className="flex justify-between items-center w-[26vw] h-[4vw] mt-[1vw]">
-                <button className="w-[40%] h-[60%] mr-5 ml-5 border-solid border-1 border-[#A85CF9] rounded-xl text-[black] hover:bg-[#5534A5] hover:text-[white] duration-300"
-                    onClick={setSaveExercise}>
-                    save
-                </button>
-
-
-                <button className="w-[40%] h-[60%] mr-5 ml-5 border-solid border-1 border-[#A85CF9] rounded-xl text-[black] hover:bg-[#5534A5] hover:text-[white] duration-300" onClick={(e) => {
-                    if (isSelectDisabled === true)
-                        setIsSelectDisabled(false)
-                    else
-                        setIsSelectDisabled(true)
-
-                    if (iswebcamEnable === true) {
-                        if (stateResultData.btnStateStart === false) {
-                            setBtnName("Stop")
-                            const new_data = { ...stateResultData, btnStateStart: true }
-                            setStateResultData(new_data)
-                        }
-
-                        else {
-                            const new_data = { ...stateResultData, btnStateStart: false }
-                            setStateResultData(new_data)
-                            setBtnName("Start")
-                        }
-                    }
-
-                    else {
-                        alert("Please Turn on Camera")
-                    }
-                }}>
-                    {btn_name}
-                </button>
-
-            </div>
-
-
-
         </div>
     )
 }

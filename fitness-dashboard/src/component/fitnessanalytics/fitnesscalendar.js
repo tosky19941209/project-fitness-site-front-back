@@ -62,8 +62,8 @@ function FitnessCalendar({ planData, setPlanData }) {
                             setPlanData(newData)
                         }}>
                         <div className="flex flex-col justify-center items-center">
-                            <p className={`${index === accidentID ? 'text-[white]' : 'text-[black]'} text-[20px] mt-[50%]`}>{month[index] + "/" + date[index]}</p>
-                            <p className={`${index === accidentID ? 'text-[white]' : 'text-[#757575]'} text-[15px] mt-[-20%]`}>{item}</p>
+                            <p className={`${index === accidentID ? 'text-[white]' : 'text-[black]'} text-[17px] mt-[50%]`}>{month[index] + "/" + date[index]}</p>
+                            <p className={`${index === accidentID ? 'text-[white]' : 'text-[#757575]'} text-[13px] mt-[-20%]`}>{item}</p>
                         </div>
                     </button>
                 ))

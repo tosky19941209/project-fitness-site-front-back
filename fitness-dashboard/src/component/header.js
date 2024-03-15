@@ -70,20 +70,22 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
 
     return (
         <div className="flex flex-col justify-center w-[100%] h-[15%]">
+            
             <div className=" flex justify-between" >
                 <div></div>
-                <p className={`text-[#5534A5] text-[200%] ml-[10%]`}>{content[sideBarIndex]}</p>
+                <p className={`text-[#5534A5] text-[20px] md:text-[50px] ml-[30%] md:ml-[10%]`}>{content[sideBarIndex]}</p>
                 <div className="flex flex-col">
                     <div className="flex  items-center mr-10">
                         <button onClick={(e) => {
                             showWidget === true ? setShowWidget(false) : setShowWidget(true)
                         }}
-                        ><img className="border rounded-[50%]" src={avatarSrc} width="80px"></img></button>
+                        ><img className="border rounded-[50%] hidden md:block " src={avatarSrc} width="80px"></img></button>
                         <p className="text-[#757575] ml-10">{avatarName}</p>
                     </div>
 
                 </div>
             </div>
+
             <div className="flex justify-end absolute z-10 w-[90%] h-[1%] mt-[15%]">
                 {
                     showWidget &&

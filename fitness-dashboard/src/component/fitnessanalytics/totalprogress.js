@@ -1,11 +1,11 @@
 import React from "react";
 import Circular from './circulprogress'
+import CircularProgress from '@mui/material/CircularProgress';
 function TotalProgress() {
     return (
 
-            <div className="flex flex-col relative">
+            <div className="flex flex-col justify-center items-center w-[100%] h-[100%]">
                     <Circular/>
-                    {/* <CircularProgressWithLabel progress_value = {99}/> */}
             </div>
 
 

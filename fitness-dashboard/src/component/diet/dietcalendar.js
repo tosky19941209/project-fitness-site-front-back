@@ -66,12 +66,12 @@ function DietCalendar({ dietPlan, setDietPlan }) {
                             }}
                         >
                             <div className="flex flex-col justify-center items-center w-[80%] h-[70%]">
-                                <p className={`${index === accidentID ? 'text-[white]' : 'text-[#5534A5]'} mt-[20%]
+                                <p className={`${index === accidentID ? 'text-[white]' : 'text-[#5534A5]'} mt-[10%]
                                                 min-[300px]:text-[12px] 
                                                 min-[720px]:text-[12px]
                                                 min-[1500px]:text-[20px] 
                                                 `}>{month[index] + '/' + date[index]}</p>
-                                <p className={`${index === accidentID ? 'text-[white]' : 'text-[#5534A5]'} text-[25px] mt-[-20%]
+                                <p className={`${index === accidentID ? 'text-[white]' : 'text-[#5534A5]'} text-[25px] mt-[-10%]
                                                 min-[300px]:text-[15px]
                                                 min-[720px]:text-[15px] 
                                                 min-[1500px]:text-[25px] 

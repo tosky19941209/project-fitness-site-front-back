@@ -39,16 +39,12 @@ function Chart() {
     }, [])
 
     return (
-        <div className="flex flex-col w-[95%] h-[90%] mt-10 ml-5 items-center 
-                        min-[1500px]:flex-row min-[1500px]:h-[90%]">
-            <div className="w-[90%] h-[40%] mt-[2%]
-                            min-[1500px]:w-[65%] min-[1500px]:h-[80%]">
+        <div className="flex flex-col md:flex-row justify-center items-center w-[96%] h-[96%]">
+            <div className="w-[100%] h-[50%] md:w-[60%] md:h-[100%]">
                 <MUIChart history={history} />
             </div>
 
-            <div className="flex justify-center items-center 
-                            w-[95%] h-[50%] mt-[4%]
-                            min-[1500px]:w-[35%] min-[1500px]:h-[80%]">
+            <div className="flex flex-col justify-center items-center w-[100%] h-[50%] md:w-[40%] md:h-[100%]">
                 <Result history={history} />
             </div>
         </div>

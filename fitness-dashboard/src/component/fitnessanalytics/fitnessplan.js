@@ -53,7 +53,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
     }, [updateSignal])
 
     return (
-        <div className="flex flex-col items-center border rounded-xl w-full h-[75%] items-center overflow-y-auto">
+        <div className="flex flex-col items-center border rounded-xl w-full h-[55%] xl:h-[75%] items-center overflow-y-auto">
             <button className='border rounded-[50%] w-[7%] min-[1000px]:w-[7%]  mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
                 onClick={
                     (e) => {
@@ -64,9 +64,9 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             </button>
 
             {showWidget &&
-                <div className="mt-1 w-[95%] h-[30%] min-[1000px]:h-[33%] bg-[#F1EEF6] border rounded-xl">
-                    <p className="text-[black] text-[15px] text-left mt-3">Exercise Kind</p>
-                    <input className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
+                <div className="mt-1 w-[95%] md:h-[32%] xl:h-[30%] bg-[#F1EEF6] border rounded-xl">
+                    <p className="text-[black] text-[15px] text-left mt-1 xl:mt-3">Exercise Kind</p>
+                    <input className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-1 xl:mt-[-3%]"
                         style={{
                             width: "98%"
                         }}
@@ -76,9 +76,9 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                         }}
                     >
                     </input>
-                    <p className="text-[black] text-[15px] text-left mt-2">Time</p>
+                    <p className="text-[black] text-[15px] text-left mt-1 xl:mt-2">Time</p>
                     <div className="flex">
-                        <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
+                        <input type='time' className="form-control w-[16%] h-[20%] mr-1 ml-1 mt-[-1%] xl:mt-[-3%]"
                             style={{
                                 width: "98%",
                                 height: "130%"
@@ -88,7 +88,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                                 setExerciseStartTime(e.target.value)
                             }}
                         ></input>
-                        <input type='time' className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-[-3%]"
+                        <input type='time' className="form-control w-[18%] h-[20%] mr-4 xl:mr-2 ml-1 mt-[-1%] xl:mt-[-3%]"
                             style={{
                                 width: "98%",
                                 height: "130%"
@@ -134,7 +134,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             {
 
                 dailyPlanExercise.map((item, index) => (
-                    <div className="flex border w-[94%] h-[15%] rounded-xl mt-2 justify-between z-[0]">
+                    <div className="flex border w-[94%] md:h-[20%] xl:h-[15%] rounded-xl mt-2 justify-between z-[0]">
                         <div className="w-[12px] bg-[#5534A5] rounded-xl" />
                         <div className="flex w-[94%] rounded-xl">
                             <div className="flex flex-col justify-between">

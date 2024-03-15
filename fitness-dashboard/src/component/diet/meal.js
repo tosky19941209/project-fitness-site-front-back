@@ -169,33 +169,29 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
 
     }, [updateSignal])
     return (
-        <div className="flex flex-col justify-center items-center w-[20%] h-[90%] mr-5 ml-5 border rounded-xl mt-[1%]">
-            <p className="text-[#5534A5]">{title}</p>
-            <button className="mt-[-7%] ml-[75%] hover:bg-[#A85CF9] rounded-[50%]
-                                min-[1500px]:w-[10%]
-                                min-[1000px]:w-[15%]
-                                min-[720px]:w-[15%]
-                                "
+        <div className=" justify-start items-center w-[90%] h-[19%] sm:h-[90%] md:w-[90%] xl:h-[94%] mr-5 ml-5 border rounded-xl mt-[1%] overflowY-auto">
+            <p className="text-[#5534A5] mt-[5%] text-[30px] ">{title}</p>
+            <button className="mt-[-7%] ml-[75%] hover:bg-[#A85CF9] rounded-[50%] w-[30px] "
                 onClick={(e) => {
                     showWidget === false ? setShowWidget(true) : setShowWidget(false)
                 }}>
-                    <img src='plus.png' className="w-[100%]"></img>
+                <img src='plus.png' className="w-[100%]"></img>
             </button>
             {
                 showWidget &&
-                <div className="w-[95%] h-[40%] border rounded-xl bg-[#F1EEF6] shadow-xl">
-                    <p className="text-[black] text-[60%] text-left ml-3"> Food </p>
-                    <input value={addFood} className="form-control "
+                <div className="w-[90%] h-[66%] md:h-[60%] xl:h-[28%] border rounded-xl bg-[#F1EEF6] shadow-xl ml-[5%] mt-[-3%] xl:mt-[0px]">
+                    <p className="text-[black] text-[20px] text-left ml-10 mt-2"> Food </p>
+                    <input value={addFood} className="form-control"
                         style={{
                             width: "90%",
                             marginLeft: "5%",
-                            marginTop: "-3%",
+                            marginTop: "-1%",
                         }}
                         onChange={(e) => {
                             setAddFood(e.target.value)
                         }}></input>
-                    <div className="w-[100%] h-[40%]">
-                        <button className="text-[#5534A5] text-[60%] border rounded-[70px] w-[40%] hover:bg-[#5534A5] hover:text-[white] duration-500 mr-2 ml-2"
+                    <div className="flex mt-[3%] md:mt-4 xl:mt-2">
+                        <button className="text-[#5534A5] text-[90%] xl:text-[60%] border rounded-[70px] w-[40%] hover:bg-[#5534A5] hover:text-[white] duration-500 mr-[5%] ml-[5%]"
                             onClick={(e) => {
                                 const newMeal = [...mealContent]
                                 newMeal.push(addFood)
@@ -204,7 +200,7 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
                                 setAddFood('')
                                 setUpdateSignal(prev => prev + 1)
                             }}>Add</button>
-                        <button className="text-[#5534A5] text-[60%] border rounded-[70px] w-[40%] hover:bg-[#5534A5] hover:text-[white] duration-500 mr-2 ml-2"
+                        <button className="text-[#5534A5] text-[90%] xl:text-[60%] border rounded-[70px] w-[40%] hover:bg-[#5534A5] hover:text-[white] duration-500 mr-[5%] ml-[5%]"
                             onClick={(e) => {
                                 setShowWidget(false)
                             }}>Close</button>
@@ -212,13 +208,13 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
                 </div>
             }
 
-            <div className="w-[90%] h-[80%] mt-2">
+            <div className="flex flex-col justify-start items-center w-[100%] h-[40%] sm:h-[45%] md:h-[70%] md:w-[80%] ml-[5%] mt-2">
 
                 {
                     mealContent.map((item, index) => (
-                        <div className="flex justify-between items-center w-[100%] h-[17%] mt-1 mb-1 border rounded-xl shadow-sm">
+                        <div className="flex justify-between items-center w-[90%] ml-[-10%] md:w-[100%] md:w-[113%] md:ml-[13%] h-[40%] sm:h-[40%] md:h-[20%] mt-1 mb-1 border rounded-xl shadow-sm ">
                             <p className="text-[black] text-[18px] ml-5 mt-3">{item}</p>
-                            <button className="w-[14%]"
+                            <button className="w-[35px] md:w-[5%] xl:w-[15%]"
                                 onClick={(e) => {
                                     const newData = []
                                     let j = 0
@@ -231,7 +227,7 @@ function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
                                     setMealContent(newData)
                                     setUpdateSignal(prev => prev + 1)
                                 }}>
-                                <img src={index === accidentID ? 'close_hover.png' : 'close.png'} 
+                                <img src={index === accidentID ? 'close_hover.png' : 'close.png'}
                                     onMouseEnter={() => { setAccidentID(index) }}
                                     onMouseLeave={() => { setAccidentID(null) }}></img>
                             </button>

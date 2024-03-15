@@ -75,7 +75,7 @@ function Result({ history }) {
     }, [resultAccuracy, resultCounter, resultDurtime])
 
     return (
-        <div className="flex flex-col justify-center items-center w-[80%] h-[80%]">
+        <div className="flex flex-col justify-center items-center  w-[80%] h-[80%] md:w-[100%] xl:w-[100%]">
             {/* <select className="form-control" style={{
                 width: "15vw"
             }}>

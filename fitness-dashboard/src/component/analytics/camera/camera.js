@@ -201,7 +201,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
 
 
     return (
-        <div className='flex justify-center w-[48vw] h-[40vw] border rounded-xl mb-[0.5vw] ml-[1vw]'>
+        <div className='flex justify-center w-[100vw] h-[70vw] xl:w-[48vw] xl:h-[40vw] border rounded-xl mb-[0.5vw] ml-[1vw]'>
             <video id='unrealvideo'
                 ref={videoRef}
                 key={unreal_video_key}
@@ -215,7 +215,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                 <source src={unreal_video_url}></source>
             </video>
 
-            <div className='relative w-[40vw] h-[25vw] mt-[2vw] '>
+            <div className='relative w-[90vw] h-[25vw] mt-[2vw] '>
                 <p className='text-[red]'> {tipSpeaker}</p>
                 <div className='relative mt-[1%] w-[100%] h-[100%] bg-black'>
                     <div className='w-[100%] h-[100%] bg-[red]'>
@@ -228,15 +228,13 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                         )
                         }
                     </div>
-                    <canvas ref={canvasRef} className='absolute top-0 left-0 bg-black' width='770' height='480'></canvas>
+                    <canvas ref={canvasRef} className='absolute top-0 left-0 bg-black w-[100%]' width='770' height='480'></canvas>
                 </div>
 
                 <div className='absolute top-0 left-0 mt-[6vh] w-[10%] h-[100%]'>
-                    <progress min='0' max='100' value={accuracy}
+                    <progress className='w-[5px] h-[50vw] xl:h-[27vw]' min='0' max='100' value={accuracy}
                         style={{
                             zIndex: '1',
-                            width: '5px',
-                            height: '23vw',
                             writingMode: 'vertical-rl',
                             marginTop: '1vw',
                             accentColor: 'aqua',
@@ -245,8 +243,8 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     ></progress>
                 </div>
 
-                <div className='flex relative w-[100%] h-[20%] mt-[-5vw]'>
-                    <button className='flex justify-center items-center ml-[45%] w-[4vw] h-[4vw] border rounded-[50%] shadow-xl
+                <div className='flex relative w-[100%] h-[45%] xl:h-[20%] mt-[25vw] xl:mt-[-5%]'>
+                    <button className='flex justify-center items-center ml-[45%] w-[8vw] h-[8vw] mt-[-6%] xl:w-[4vw] xl:h-[4vw] xl:mt-[5%] border rounded-[50%] shadow-xl
                         hover:shadow-[0_0_30px_5px_rgba(0,142,236,0.815)] duration-200'
                         onClick={async () => {
                             // try {

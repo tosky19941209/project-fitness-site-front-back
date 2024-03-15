@@ -28,7 +28,7 @@ function Analytics() {
   })
 
   return (
-    <div className='flex justify-center  w-[100%] h-[100%]'>
+    <div className='flex flex-col xl:flex-row justify-start items-center   w-[100%] h-[100%] sm:h-[150%] md:h-[170%] xl:h-[80%]'>
       <Camera setStateResultData={setStateResultData} stateResultData={stateResultData} exerciseResult={exerciseResult} setExerciseResult={setExerciseResult} ></Camera>
       <Result setStateResultData={setStateResultData} stateResultData={stateResultData} exerciseResult={exerciseResult} setExerciseResult={setExerciseResult}></Result>
     </div>

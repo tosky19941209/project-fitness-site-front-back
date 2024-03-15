@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DietCalendar from './dietcalendar.js'
 import DietDaily from './dietdaily.js'
 import api from '../../service/axios.js'
-function DietPlan({ email, password }) {
+function    DietPlan({ email, password }) {
 
     const [dietPlan, setDietPlan] = useState({
         year: '',
@@ -72,7 +72,7 @@ function DietPlan({ email, password }) {
     }, [dietPlan.day])
 
     return (
-        <div className="border rounded-xl  w-[100%] h-[100%]">
+        <div className="border rounded-xl h-[200%] w-[100%] xl:h-[81%] mt-[2%] md:mt-[0px]">
             <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />
             <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />   
         </div>

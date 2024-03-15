@@ -6,6 +6,7 @@ import OverView from "./overview/overview.js";
 import Header from './header.js'
 import Analytics from './analytics/analytics.js'
 import Support from "./support/support.js";
+import { mangoFusionPaletteDark } from "@mui/x-charts";
 function MainBox({ mainContent, setMainContent }) {
 
     const [headerContent, setHeaderContent] = useState({
@@ -27,8 +28,24 @@ function MainBox({ mainContent, setMainContent }) {
         }
     }, [sideBarIndex])
 
+    const setSideBarState = () => {
+        if( !mainContent.showSideBar) return 
+        const newData = {
+            ...mainContent,
+            showSideBar: !mainContent.showSideBar
+        }
+        setMainContent(newData)
+    }
+
+    useEffect(() => {
+        console.log(mainContent.showSideBar)
+    }, [mainContent.showSideBar])
+
+
     return (
-        <div className="w-[80%] h-[full]">
+        <div className="w-[100%] xl:w-[100%] h-[full]"
+            onMouseDown={setSideBarState}
+            >
             <Header sideBarIndex={sideBarIndex} headerContent={headerContent} setHeaderContent={setHeaderContent} setSideBarIndex={setSideBarIndex} />
 
             {sideBarIndex === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}

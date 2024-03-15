@@ -9,9 +9,9 @@ function TotalTime() {
                 <div className="flex flex-col justify-center items-center w-[40%] h-[100%] rounded-xl">
                     <img src='totaltime.png' width='50%' height='50%'></img>
                 </div>
-                <div className="justify-start items-center w-[60%] h-[100%]">
+                <div className="flex flex-col justify-center items-center w-[60%] h-[100%]">
                     <p className="text-[#757575] text-[15px] text-left">Total Time</p>
-                    <p className="text-black text-[20px] text-left">8 Hours</p>
+                    <p className="text-black text-[18px] text-left">8 Hours</p>
                 </div>
             </div>
 
@@ -19,9 +19,9 @@ function TotalTime() {
                 <div className="flex flex-col justify-center items-center w-[40%] h-[100%] rounded-xl">
                     <img src='totalcomplete.png' width='50%' height='50%'></img>
                 </div>
-                <div className="justify-start items-center w-[60%] h-[100%]">
+                <div className="flex flex-col justify-center items-center w-[60%] h-[100%]">
                     <p className="text-[#757575] text-[15px] text-left">Complete</p>
-                    <p className="text-black text-[20px] text-left">92%</p>
+                    <p className="text-black text-[18px] text-left">92%</p>
                 </div>
             </div>
 

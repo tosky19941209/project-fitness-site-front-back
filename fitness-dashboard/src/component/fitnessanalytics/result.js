@@ -9,9 +9,6 @@ function Result_weekly(props) {
             <div className="flex justify-between items-center">
                 <p className="text-[black]">{props.time}</p>
                 <p className={`w-[30%] h-[60%] bg-[${props.color}] rounded-xl min-[1500px]:w-[50%]`}>{props.progress}</p>
-                {/* <p className={`w-[30%] h-[60%] bg-[#00E0FF] rounded-xl`}>{props.progress}</p> */}
-                {/* <p className={`w-[30%] h-[60%] bg-[#929292] rounded-xl`}>{props.progress}</p> */}
-                {/* <p className={`w-[30%] h-[60%] bg-[#A85CF9] rounded-xl`}>{props.progress}</p> */}
             </div>
         </div>
     )
@@ -83,9 +80,9 @@ function Result({ history }) {
                 <option>Weekly</option>
             </select> */}
 
-            <Result_weekly category="Total Counter" time={resultCounter + ""} progress={progressCounter} color="#00E0FF" />
-            <Result_weekly category="Total Time" time={resultDurtime + " s"} progress={progressDurtime} color="#929292" />
-            <Result_weekly category="Total Accuracy" time={resultAccuracy + " %"} progress={progressAccuracy} color="#A85CF9" />
+            <Result_weekly category="Total Counter" time={Number(resultCounter.toFixed(1)) + ""} progress={progressCounter} color="#00E0FF" />
+            <Result_weekly category="Total Time" time={Number(resultDurtime.toFixed(1)) + " s"} progress={progressDurtime} color="#929292" />
+            <Result_weekly category="Total Accuracy" time={Number(resultAccuracy.toFixed(1)) + " %"} progress={progressAccuracy} color="#A85CF9" />
 
 
 

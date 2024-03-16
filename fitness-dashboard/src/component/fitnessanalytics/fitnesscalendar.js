@@ -46,10 +46,10 @@ function FitnessCalendar({ planData, setPlanData }) {
 
 
     return (
-        <div className="flex border rounded-xl w-[100%] h-[20%] justify-center items-center bg-[#F1EEF6] mb-4">
+        <div className="flex border rounded-xl w-[100%] h-[13%] justify-center items-center bg-[#F1EEF6] mb-4">
             {
                 daysOfWeek.map((item, index) => (
-                    <button className={`flex justify-center items-center w-[15%] h-[60%] ${index === accidentID ? 'bg-[#5534A5]' : ''} rounded-lg mr-2 ml-2 duration-500 hover:shadow-2xl`}
+                    <button className={`flex justify-center items-center w-[15%] h-[60%] ${index === accidentID ? 'bg-[#5534A5]' : ''} rounded-lg mr-1 ml-1 duration-500 hover:shadow-2xl`}
                         onClick={(e) => {
                             setAccidentID(index)
                             const newData = {

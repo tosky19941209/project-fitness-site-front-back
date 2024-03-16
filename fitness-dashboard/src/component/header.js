@@ -93,7 +93,10 @@ function Header({ sideBarIndex, headerContent, setHeaderContent, setSideBarIndex
             <div className="flex justify-end absolute z-10 w-[90%] h-[1%] mt-[15%]">
                 {
                     showWidget &&
-                    <div className="flex flex-col justify-center items-center w-[90%] mt-[0%] md:w-[40%] xl:w-[30%] h-[250px] mr-[1%] md:mr-[5%] xl:mr-[20%] mt-[-100px] border rounded-xl bg-[#F1EEF6] shadow-xl">
+                    <div className="flex flex-col justify-center items-center 
+                                    w-[90%] h-[250px] mr-[1%] mt-[0%] 
+                                    md:w-[40%] md:mt-[-5%] md:mr-[-5%] 
+                                    xl:w-[30%] xl:mr-[20%] xl:mt-[-8%] border rounded-xl bg-[#F1EEF6] shadow-xl">
                         <div className="flex flex-col w-[90%] h-[80%] justify-center">
 
                             <p className="text-[black] text-left text-[20px]">Email</p>

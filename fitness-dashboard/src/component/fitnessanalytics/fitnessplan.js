@@ -54,7 +54,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
 
     return (
         <div className="flex flex-col items-center border rounded-xl w-full h-[55%] xl:h-[75%] items-center overflow-y-auto">
-            <button className='border rounded-[50%] w-[7%] min-[1000px]:w-[7%]  mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
+            <button className='border rounded-[50%] w-[5%] md:w-[3%] xl:w-[5%]  mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
                 onClick={
                     (e) => {
                         showWidget === false ? setShowWidget(true) : setShowWidget(false)

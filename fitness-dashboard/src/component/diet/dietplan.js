@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DietCalendar from './dietcalendar.js'
 import DietDaily from './dietdaily.js'
 import api from '../../service/axios.js'
-function    DietPlan({ email, password }) {
+function DietPlan() {
 
     const [dietPlan, setDietPlan] = useState({
         year: '',
@@ -16,11 +16,15 @@ function    DietPlan({ email, password }) {
             snack1: [],
             snack2: []
         },
+        dietMenu: {
+            foodName: [],
+            kcal: []
+        }
     })
 
     useEffect(() => {
-        if(dietPlan.year === '') return
-        
+        if (dietPlan.year === '') return
+
         const localEmail = localStorage.getItem("fitnessemail")
         const localPassword = localStorage.getItem("fitnesspassword")
         const header = {
@@ -41,16 +45,20 @@ function    DietPlan({ email, password }) {
             }
         }).then((res) => {
             const message = res.data.message
+            const result = res.data.result
             if (message === 'success') {
-                const result = res.data.result
                 const newData = {
                     ...dietPlan,
                     food: {
-                        breakfast: result.meal.breakfast,
-                        lunch: result.meal.lunch,
-                        dinner: result.meal.dinner,
-                        snack1: result.meal.snack1,
-                        snack2: result.meal.snack2
+                        breakfast: result.plandiet.meal.breakfast,
+                        lunch: result.plandiet.meal.lunch,
+                        dinner: result.plandiet.meal.dinner,
+                        snack1: result.plandiet.meal.snack1,
+                        snack2: result.plandiet.meal.snack2
+                    },
+                    dietMenu: {
+                        foodName: result.dietMenu.foodName,
+                        kcal: result.dietMenu.kcal
                     }
                 }
                 setDietPlan(newData)
@@ -63,6 +71,10 @@ function    DietPlan({ email, password }) {
                         dinner: [],
                         snack1: [],
                         snack2: []
+                    },
+                    dietMenu: {
+                        foodName: result.dietMenu.foodName,
+                        kcal: result.dietMenu.kcal
                     }
                 }
                 setDietPlan(newData)
@@ -73,8 +85,8 @@ function    DietPlan({ email, password }) {
 
     return (
         <div className="border rounded-xl h-[200%] w-[100%] xl:h-[81%] mt-[2%] md:mt-[0px]">
-            <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />
-            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} email={email} password={password} />   
+            <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} />
+            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} />
         </div>
     )
 

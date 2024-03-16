@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../../service/axios'
-function Meal({ title, meal, index, email, password, dietPlan, setDietPlan }) {
+function Meal({ title, meal, index, dietPlan, setDietPlan }) {
 
     const [mealContent, setMealContent] = useState([])
     const [accidentID, setAccidentID] = useState(-1)

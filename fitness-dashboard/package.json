@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.4",
     "react-webcam": "^7.2.0",
+    "reactstrap": "^9.2.2",
     "styled-components": "^6.1.8",
     "toast": "^0.5.4",
     "toastr": "^2.1.4",

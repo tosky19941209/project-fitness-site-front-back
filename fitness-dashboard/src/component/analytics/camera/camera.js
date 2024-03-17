@@ -5,8 +5,9 @@ import * as mediapipePose from "@mediapipe/pose";
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { Pose } from "@mediapipe/pose";
 import Webcam from 'react-webcam';
-import api from '../../../service/axios'
 import { Analysis_exercise } from '../../function_set/analysis'
+import { Progress } from 'reactstrap';
+
 let max_accuracy = 0
 let prev_accuracy = 0
 function Camera({ setStateResultData, stateResultData, exerciseResult, setExerciseResult }) {
@@ -251,15 +252,16 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                 </div>
 
                 <div className='absolute top-0 left-0 mt-[10%] w-[10%] h-[100%]'>
-                    <progress className='w-[5px] h-[50vw] xl:h-[27vw]' min='0' max='100' value={accuracy}
+                    <Progress className="w-[550%] ml-[-250%] mt-[330%] min-[100px]:mt-[310%] md:mt-[260%] xl:mt-[280%]"
+                        color="info"
+                        barClassName="my-progress"
+                        value={accuracy}
+
                         style={{
-                            zIndex: '1',
-                            writingMode: 'vertical-rl',
-                            marginTop: '1vw',
-                            accentColor: 'aqua',
-                            // boxShadow: '0 0 5px 5px rgba(0, 142, 236, 0.815)'
+                            transform: 'rotate(270deg)',
+                            height: '5px'
                         }}
-                    ></progress>
+                    />
                 </div>
 
                 <div className='flex relative w-[100%] h-[45%] xl:h-[20%] mt-[25vw] xl:mt-[-5%]'>

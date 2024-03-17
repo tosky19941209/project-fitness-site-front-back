@@ -617,6 +617,11 @@ video {
   z-index: 0;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -1123,6 +1128,10 @@ video {
 
 .w-\[\] {
   width: ;
+}
+
+.w-\[50px\] {
+  width: 50px;
 }
 
 .transform {
@@ -1828,6 +1837,14 @@ video {
 
   .xl\:h-\[94\%\] {
     height: 94%;
+  }
+
+  .xl\:h-\[\] {
+    height: ;
+  }
+
+  .xl\:h-\[100px\] {
+    height: 100px;
   }
 
   .xl\:w-\[100\%\] {

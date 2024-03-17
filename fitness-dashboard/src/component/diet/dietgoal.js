@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DietGoalPlan from "./dietgoalplan";
+import DietGoalEdit from "./dietgoaledit";
 import api from '../../service/axios'
-import React from 'react';
 import { Progress } from 'reactstrap';
-import './diet.css'
 function DietGoal({ dietCal }) {
 
     const [dailyTotalKcal, setDailyTotalKcal] = useState(0)
     const [weeklyTotalKcal, setWeeklyTotalKcal] = useState(0)
+    const [targetKcal, setTargetKcal] = useState(0)
 
     const calc_kcal = (foodName, dietMenu) => {
         return dietMenu.kcal[dietMenu.foodName.indexOf(foodName)]
@@ -109,7 +109,7 @@ function DietGoal({ dietCal }) {
                 })
             clearInterval(newTimer)
         }
-        const newTimer = setInterval(setTotalWeekly, 1000)
+        const newTimer = setInterval(setTotalWeekly, 100)
     }, [dietCal])
 
 
@@ -122,13 +122,12 @@ function DietGoal({ dietCal }) {
                         min-[720px]:h-[40%]
                         min-[1000px]:flex-row min-[1000px]:h-[18%]
                         min-[1500px]:h-[18%]">
-                <DietGoalPlan imgsrc='karory.png' title='Diet Goal' content='Calorie Counting' />
+                <DietGoalEdit imgsrc='karory.png' title='Diet Goal' content='Calorie Counting' targetKcal={targetKcal} setTargetKcal={setTargetKcal} />
                 <DietGoalPlan imgsrc='sumcarory.png' title='Weekly Total Calory' content={String(weeklyTotalKcal) + " kcal"} />
                 <DietGoalPlan imgsrc='sum.png' title='Carory Comsumed Today' content={String(dailyTotalKcal) + " kcal"} />
             </div>
-            <div className="flex flex-col justify-center items-center w-[100%] h-[50px]  bg-red-300">
-                <progress class='progressBar'  min='0' max='100' value={weeklyTotalKcal / 10000 * 100}></progress>
-                {/* <progress className='w-[100%] h-[5px] accent-[red]' min='0' max='100' value='90'></progress> */}
+            <div className="flex flex-col justify-center items-center w-[100%] h-[5px]  bg-red-300">
+                <Progress className="w-[100%]" barClassName="my-progress" value={weeklyTotalKcal / targetKcal * 100} />
             </div>
         </>
     )

@@ -256,7 +256,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                             zIndex: '1',
                             writingMode: 'vertical-rl',
                             marginTop: '1vw',
-                            // accentColor: 'aqua',
+                            accentColor: 'aqua',
                             // boxShadow: '0 0 5px 5px rgba(0, 142, 236, 0.815)'
                         }}
                     ></progress>

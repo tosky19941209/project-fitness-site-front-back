@@ -53,7 +53,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
     }, [updateSignal])
 
     return (
-        <div className="flex flex-col items-center border rounded-xl w-full h-[55%] xl:h-[75%] items-center overflow-y-auto">
+        <div className="flex flex-col items-center border rounded-xl w-full xl:h-[84%] items-center pb-[20px]">
             <button className='border rounded-[50%] w-[5%] md:w-[3%] xl:w-[5%]  mt-[2%] ml-[80%] text-[black] hover:bg-[#A85CF9] text-[60%]'
                 onClick={
                     (e) => {
@@ -64,7 +64,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
             </button>
 
             {showWidget &&
-                <div className="mt-1 w-[95%] md:h-[32%] xl:h-[30%] bg-[#F1EEF6] border rounded-xl">
+                <div className="mt-1 w-[95%] xl:h-[30%] bg-[#F1EEF6] border rounded-xl">
                     <p className="text-[black] text-[15px] text-left mt-1 xl:mt-3">Exercise Kind</p>
                     <input className="form-control w-[20%] h-[20%] mr-1 ml-1 mt-1 xl:mt-[-3%]"
                         style={{

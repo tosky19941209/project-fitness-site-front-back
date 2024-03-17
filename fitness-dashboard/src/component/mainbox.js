@@ -37,9 +37,9 @@ function MainBox({ mainContent, setMainContent }) {
         setMainContent(newData)
     }
 
-    useEffect(() => {
-        console.log(mainContent.showSideBar)
-    }, [mainContent.showSideBar])
+    // useEffect(() => {
+    //     console.log(mainContent.showSideBar)
+    // }, [mainContent.showSideBar])
 
 
     return (
@@ -55,6 +55,9 @@ function MainBox({ mainContent, setMainContent }) {
             {sideBarIndex === 4 ? <Support/>: spaceTag}
         </div>
     )
+
+
+    
 }
 
 export default MainBox

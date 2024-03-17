@@ -16,12 +16,27 @@ function DietPlan() {
             snack1: [],
             snack2: []
         },
+        amount: {
+            breakfast: [],
+            lunch: [],
+            dinner: [],
+            snack1: [],
+            snack2: []
+        },
         dietMenu: {
             foodName: [],
-            kcal: []
+            kcal: [],
+            protein: [],
+            water: [],
+            mineral: []
         }
     })
 
+    useEffect(() => {
+        console.log('amount',dietPlan.amount)
+        console.log('food',dietPlan.food)
+    }, [dietPlan.amount])
+    
     useEffect(() => {
         if (dietPlan.year === '') return
 
@@ -46,6 +61,7 @@ function DietPlan() {
         }).then((res) => {
             const message = res.data.message
             const result = res.data.result
+            console.log(result)
             if (message === 'success') {
                 const newData = {
                     ...dietPlan,
@@ -56,11 +72,22 @@ function DietPlan() {
                         snack1: result.plandiet.meal.snack1,
                         snack2: result.plandiet.meal.snack2
                     },
+                    amount: {
+                        breakfast: result.plandiet.amount.breakfast,
+                        lunch: result.plandiet.amount.lunch,
+                        dinner: result.plandiet.amount.dinner,
+                        snack1: result.plandiet.amount.snack1,
+                        snack2: result.plandiet.amount.snack2
+                    },
                     dietMenu: {
                         foodName: result.dietMenu.foodName,
-                        kcal: result.dietMenu.kcal
+                        kcal: result.dietMenu.kcal,
+                        protein: result.dietMenu.protein,
+                        water: result.dietMenu.water,
+                        mineral: result.dietMenu.mineral
                     }
                 }
+                console.log(newData)
                 setDietPlan(newData)
             } else {
                 const newData = {
@@ -72,9 +99,19 @@ function DietPlan() {
                         snack1: [],
                         snack2: []
                     },
+                    amount: {
+                        breakfast: [],
+                        lunch: [],
+                        dinner: [],
+                        snack1: [],
+                        snack2: []
+                    },
                     dietMenu: {
                         foodName: result.dietMenu.foodName,
-                        kcal: result.dietMenu.kcal
+                        kcal: result.dietMenu.kcal,
+                        protein: result.dietMenu.protein,
+                        water: result.dietMenu.water,
+                        mineral: result.dietMenu.mineral
                     }
                 }
                 setDietPlan(newData)
@@ -84,7 +121,7 @@ function DietPlan() {
     }, [dietPlan.day])
 
     return (
-        <div className="border rounded-xl h-[200%] w-[100%] xl:h-[81%] mt-[2%] md:mt-[0px]">
+        <div className="border rounded-xl w-[100%] pb-[20px] mt-[2%] md:mt-[0px]">
             <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} />
             <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} />
         </div>

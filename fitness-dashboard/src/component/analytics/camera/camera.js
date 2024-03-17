@@ -78,7 +78,6 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     landmark[i].y < 0)
                     state_pose = false
             }
-            console.log(landmark)
             if (state_pose === true) {
                 const new_calc_data = {
                     pose_data: results,
@@ -86,11 +85,9 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     state_change_exercise: state_change_exercise
                 }
                 // const result = Analysis_exercise(new_calc_data)
-                console.log("OK")
                 setCalcResult(Analysis_exercise(new_calc_data));
             }
             else {
-                console.log("no")
                 setTipSpeaker("Your entire body must be in camera")
             }
         }
@@ -253,7 +250,7 @@ function Camera({ setStateResultData, stateResultData, exerciseResult, setExerci
                     <canvas ref={canvasRef} className='absolute top-0 left-0 bg-black w-[100%]' width='770' height='480'></canvas>
                 </div>
 
-                <div className='absolute top-0 left-0 mt-[6vh] w-[10%] h-[100%]'>
+                <div className='absolute top-0 left-0 mt-[10%] w-[10%] h-[100%]'>
                     <progress className='w-[5px] h-[50vw] xl:h-[27vw]' min='0' max='100' value={accuracy}
                         style={{
                             zIndex: '1',

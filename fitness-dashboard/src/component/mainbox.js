@@ -43,14 +43,14 @@ function MainBox({ mainContent, setMainContent }) {
 
 
     return (
-        <div className="w-[100%] xl:w-[100%] h-[full]"
+        <div className="w-[100%] xl:w-[100%] h-[full] xl:ml-5"
             onMouseDown={setSideBarState}
             >
             <Header sideBarIndex={sideBarIndex} headerContent={headerContent} setHeaderContent={setHeaderContent} setSideBarIndex={setSideBarIndex} />
 
-            {sideBarIndex === 0 ? <OverView email={headerContent.email} password={headerContent.password} /> : spaceTag}
-            {sideBarIndex === 1 ? <FitnessAnalytics email={headerContent.email} password={headerContent.password} /> : spaceTag}
-            {sideBarIndex === 2 ? <Diet email={headerContent.email} password={headerContent.password} /> : spaceTag}
+            {sideBarIndex === 0 ? <OverView /> : spaceTag}
+            {sideBarIndex === 1 ? <FitnessAnalytics /> : spaceTag}
+            {sideBarIndex === 2 ? <Diet/> : spaceTag}
             {sideBarIndex === 3 ? <Analytics /> : spaceTag}
             {sideBarIndex === 4 ? <Support/>: spaceTag}
         </div>

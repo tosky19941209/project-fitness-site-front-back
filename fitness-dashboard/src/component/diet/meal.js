@@ -383,6 +383,11 @@ function Meal({ title, meal, amount, index, dietPlan, setDietPlan }) {
                                 setShowWidget(false)
                                 setAddFood('')
 
+                                setExpectKcal(0)
+                                setExpectMineral(0)
+                                setExpectProtein(0)
+                                setExpectWater(0)
+
                                 setAmountAdd(0)
                                 setUpdateSignal(prev => prev + 1)
                             }}>Add</button>

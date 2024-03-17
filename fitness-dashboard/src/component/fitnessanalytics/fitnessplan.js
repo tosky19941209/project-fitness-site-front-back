@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import api from '../../service/axios'
 function FitnessPlan({ planData, setPlanData, email, password }) {
 
-    const [dailyPlanExercise, setDailyPlanExercise] = useState([
+    const [dailyPlanExercise, setDailyPlanExercise] = useState([])
 
-    ])
-
-    const [dailyPlanTime, setDailyPlanTime] = useState([
-
-    ])
+    const [dailyPlanTime, setDailyPlanTime] = useState([])
 
     const defaultCloseBtn = 'close.png'
     const hoverCloseBtn = 'close_hover.png'
@@ -148,7 +144,7 @@ function FitnessPlan({ planData, setPlanData, email, password }) {
                                 const newDataTime = []
                                 let j = 0
                                 for (let i = 0; i < dailyPlanExercise.length; i++) {
-                                    if (dailyPlanExercise[i] !== item) {
+                                    if (i !== index) {
                                         newDataType[j] = dailyPlanExercise[i];
                                         newDataTime[j] = dailyPlanTime[i];
                                         j++

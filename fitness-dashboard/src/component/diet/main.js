@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import DietGoal from './dietgoal.js'
 import DietPlan from './dietplan.js'
-function Main ({email, password}) {
+function Main () {
+    const [dietCal, setdietCal] = useState(null)
     return(
         <div className="w-[95%] h-[100%] pb-[20px]">
-            <DietGoal/>
-            <DietPlan email={email} password={password}/>
+            <DietGoal dietCal={dietCal}/>
+            <DietPlan setdietCal={setdietCal}/>
         </div>
     )
 }

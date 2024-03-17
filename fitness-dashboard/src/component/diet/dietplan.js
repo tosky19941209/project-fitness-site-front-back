@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DietCalendar from './dietcalendar.js'
 import DietDaily from './dietdaily.js'
 import api from '../../service/axios.js'
-function DietPlan() {
+function DietPlan({setdietCal}) {
 
     const [dietPlan, setDietPlan] = useState({
         year: '',
@@ -33,9 +33,8 @@ function DietPlan() {
     })
 
     useEffect(() => {
-        console.log('amount',dietPlan.amount)
-        console.log('food',dietPlan.food)
-    }, [dietPlan.amount])
+        setdietCal(dietPlan)
+    }, [dietPlan])
     
     useEffect(() => {
         if (dietPlan.year === '') return
@@ -61,7 +60,6 @@ function DietPlan() {
         }).then((res) => {
             const message = res.data.message
             const result = res.data.result
-            console.log(result)
             if (message === 'success') {
                 const newData = {
                     ...dietPlan,
@@ -87,7 +85,6 @@ function DietPlan() {
                         mineral: result.dietMenu.mineral
                     }
                 }
-                console.log(newData)
                 setDietPlan(newData)
             } else {
                 const newData = {

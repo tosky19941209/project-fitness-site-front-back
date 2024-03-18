@@ -49,7 +49,7 @@ function DietGoalEdit(props) {
                             setTargetKcal(e.target.value)
                         }}
                     />
-                    <button className="ml-3 text-[black] text-[15px] mt-[-1%] h-[38px] w-[40%] border rounded-md bg-[#F1EEF6] hover:bg-[#5534A5] hover:text-[white] duration-300 " onClick={setSaveTargetKcal} >
+                    <button className="ml-3 z-10 text-[black] text-[15px] mt-[-1%] h-[38px] w-[40%] border rounded-md bg-[#F1EEF6] hover:bg-[#5534A5] hover:text-[white] duration-300 " onClick={setSaveTargetKcal} >
                         save
                     </button>
                     <div className="w-[10%] h-[38px]">

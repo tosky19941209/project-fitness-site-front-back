@@ -110,35 +110,6 @@ function DietGoal({ dietCal, updateWeeklySignal, setUpdateWeeklySignal }) {
 
     }, [updateWeeklySignal, dietCal])
 
-    // useEffect(() => {
-    //     if (dietCal === null) return
-    //     setDailyTotalKcal(calc_DailyTotalKcal(dietCal))
-
-    //     const header = {
-    //         email: localStorage.getItem('fitnessemail'),
-    //         password: localStorage.getItem('fitnesspassword')
-    //     }
-    //     const updateData = {
-    //         year: year,
-    //         month: month,
-    //         date: date
-    //     }
-    //     let weeklytotalcal = 0
-    //     const setTotalWeekly = () => {
-    //         api.get('/getweeklytotaldata', { params: { header: header, updateData: updateData } })
-    //             .then((res) => {
-    //                 res.data.result.map((item, i) => {
-    //                     weeklytotalcal = weeklytotalcal + weeklyTotalCalcKcal(item._id)
-    //                 })
-    //                 setWeeklyTotalKcal(weeklytotalcal)
-    //             })
-    //         clearInterval(newTimer)
-    //     }
-    //     const newTimer = setInterval(setTotalWeekly, 1000)
-    // }, [dietCal])
-
-
-
 
     return (
         <>

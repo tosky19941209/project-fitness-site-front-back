@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-function DietCalendar({ dietPlan, setDietPlan }) {
+function DietCalendar({ dietPlan, setDietPlan, btnEnable, setBtnEnable }) {
 
     const daysOfWeek = [
         'Sun',
@@ -15,6 +15,7 @@ function DietCalendar({ dietPlan, setDietPlan }) {
         'Sat',
 
     ]
+
 
     const today = new Date();
     const dayOfWeek = today.getDay();
@@ -51,7 +52,7 @@ function DietCalendar({ dietPlan, setDietPlan }) {
                         min-[1500px]:w-[90%] min-[1500px]:h-[15%] min-[150px]:ml-[5%]">
                 {
                     daysOfWeek.map((item, index) => (
-                        <button className={`flex justify-center items-center w-[40%] h-[70%] ${index === accidentID ? 'bg-[#5534A5]' : 'bg-[white]'} 
+                        <button disabled={btnEnable} className={`flex justify-center items-center w-[40%] h-[70%] ${index === accidentID ? 'bg-[#5534A5]' : 'bg-[white]'} 
                     border rounded-lg mr-1 ml-1 duration-500 hover:shadow-2xl min-[300px]:mt-[2%]`}
                             onClick={(e) => {
                                 setAccidentID(index)
@@ -63,9 +64,10 @@ function DietCalendar({ dietPlan, setDietPlan }) {
                                     day: index
                                 }
                                 setDietPlan(newData)
+                                setBtnEnable(true)
                             }}
                         >
-                            <div className="flex flex-col justify-center items-center w-[80%] h-[70%]">
+                            <div className={`flex flex-col justify-center items-center w-[100%] h-[70%] ${btnEnable === false ? '' : 'bg-[#F1EEF6]'} duration-300`}>
                                 <p className={`${index === accidentID ? 'text-[white]' : 'text-[#5534A5]'} mt-[10%]
                                                 min-[300px]:text-[12px] 
                                                 min-[720px]:text-[12px]

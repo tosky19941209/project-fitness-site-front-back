@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import DietCalendar from './dietcalendar.js'
 import DietDaily from './dietdaily.js'
 import api from '../../service/axios.js'
-function DietPlan({setdietCal}) {
+function DietPlan({ setdietCal, updateWeeklySignal, setUpdateWeeklySignal }) {
+
+    const [btnEnable, setBtnEnable] = useState(false)
 
     const [dietPlan, setDietPlan] = useState({
         year: '',
@@ -35,7 +37,7 @@ function DietPlan({setdietCal}) {
     useEffect(() => {
         setdietCal(dietPlan)
     }, [dietPlan])
-    
+
     useEffect(() => {
         if (dietPlan.year === '') return
 
@@ -58,6 +60,7 @@ function DietPlan({setdietCal}) {
                 getData: getData
             }
         }).then((res) => {
+            setBtnEnable(false)
             const message = res.data.message
             const result = res.data.result
             if (message === 'success') {
@@ -119,8 +122,8 @@ function DietPlan({setdietCal}) {
 
     return (
         <div className="border rounded-xl w-[100%] pb-[20px] mt-[2%] md:mt-[0px]">
-            <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} />
-            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} />
+            <DietCalendar dietPlan={dietPlan} setDietPlan={setDietPlan} btnEnable={btnEnable} setBtnEnable={setBtnEnable} />
+            <DietDaily dietPlan={dietPlan} setDietPlan={setDietPlan} updateWeeklySignal={updateWeeklySignal} setUpdateWeeklySignal={setUpdateWeeklySignal}/>
         </div>
     )
 

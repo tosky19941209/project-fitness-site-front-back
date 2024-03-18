@@ -3,7 +3,7 @@ import DietGoalPlan from "./dietgoalplan";
 import DietGoalEdit from "./dietgoaledit";
 import api from '../../service/axios'
 import { Progress } from 'reactstrap';
-function DietGoal({ dietCal }) {
+function DietGoal({ dietCal, updateWeeklySignal, setUpdateWeeklySignal }) {
 
     const [dailyTotalKcal, setDailyTotalKcal] = useState(0)
     const [weeklyTotalKcal, setWeeklyTotalKcal] = useState(0)
@@ -99,18 +99,43 @@ function DietGoal({ dietCal }) {
             date: date
         }
         let weeklytotalcal = 0
-        const setTotalWeekly = () => {
-            api.get('/getweeklytotaldata', { params: { header: header, updateData: updateData } })
-                .then((res) => {
-                    res.data.result.map((item, i) => {
-                        weeklytotalcal = weeklytotalcal + weeklyTotalCalcKcal(item._id)
-                    })
-                    setWeeklyTotalKcal(weeklytotalcal)
+
+        api.get('/getweeklytotaldata', { params: { header: header, updateData: updateData } })
+            .then((res) => {
+                res.data.result.map((item, i) => {
+                    weeklytotalcal = weeklytotalcal + weeklyTotalCalcKcal(item._id)
                 })
-            clearInterval(newTimer)
-        }
-        const newTimer = setInterval(setTotalWeekly, 100)
-    }, [dietCal])
+                setWeeklyTotalKcal(weeklytotalcal)
+            })
+
+    }, [updateWeeklySignal, dietCal])
+
+    // useEffect(() => {
+    //     if (dietCal === null) return
+    //     setDailyTotalKcal(calc_DailyTotalKcal(dietCal))
+
+    //     const header = {
+    //         email: localStorage.getItem('fitnessemail'),
+    //         password: localStorage.getItem('fitnesspassword')
+    //     }
+    //     const updateData = {
+    //         year: year,
+    //         month: month,
+    //         date: date
+    //     }
+    //     let weeklytotalcal = 0
+    //     const setTotalWeekly = () => {
+    //         api.get('/getweeklytotaldata', { params: { header: header, updateData: updateData } })
+    //             .then((res) => {
+    //                 res.data.result.map((item, i) => {
+    //                     weeklytotalcal = weeklytotalcal + weeklyTotalCalcKcal(item._id)
+    //                 })
+    //                 setWeeklyTotalKcal(weeklytotalcal)
+    //             })
+    //         clearInterval(newTimer)
+    //     }
+    //     const newTimer = setInterval(setTotalWeekly, 1000)
+    // }, [dietCal])
 
 
 

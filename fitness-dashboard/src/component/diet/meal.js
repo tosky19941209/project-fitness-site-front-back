@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from '../../service/axios'
-function Meal({ title, meal, amount, index, dietPlan, setDietPlan }) {
+function Meal({ title, meal, amount, index, dietPlan, setDietPlan, updateWeeklySignal, setUpdateWeeklySignal, btnEnable, setBtnEnable }) {
 
     const foodNames = dietPlan.dietMenu.foodName
     const kcals = dietPlan.dietMenu.kcal
@@ -302,7 +302,9 @@ function Meal({ title, meal, amount, index, dietPlan, setDietPlan }) {
         const apiData = { header: header, updateData: updateData }
         api.post('/setdiet', apiData)
             .then((res) => {
-                // console.log("update: ", updateData)
+                console.log("signal")
+                setUpdateWeeklySignal(prev => prev + 1)
+
             })
 
     }, [updateSignal])
@@ -404,6 +406,7 @@ function Meal({ title, meal, amount, index, dietPlan, setDietPlan }) {
                 <div className="flex flex-col justify-start items-center h-[75%] overflow-y-auto">
                     {mealContent.map((item, index) => (
                         <div className="flex justify-between w-[90%] mb-1 mt-1 border rounded-xl pl-[5%] pr-[5%] md:pl-[10%] md:pr-[10%] xl:pl-[0px] xl:pr-[0px]">
+                            <div className="w-[10px] h-[100px] bg-[#5534A5] ml-[-7%] md:ml-[-14%] xl:ml-[0px] rounded-xl"/>
                             <div className="flex flex-col">
                                 <p className="text-[black] text-[15px] xl:text-[15px] ml-5 mt-[10%]">{item + " " + calc_kcal(item) + "kcal/100g"}</p>
                                 <p className="text-[gray] text-[15px] xl:text-[15px] ml-5 mt-[-5%]">{amountContent[index] + "/g"}</p>
